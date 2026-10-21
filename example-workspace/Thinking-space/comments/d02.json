@@ -1,0 +1,45 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "unit_id": "d02",
+ "scope": "unit",
+ "journal": "lancet",
+ "comments": [
+  {
+   "id": "d02-C1",
+   "axis": "style",
+   "severity": "major",
+   "issue": "Promotional wording. 'Powerful' is on the banned list and overstates an interpretation drawn from one comparison.",
+   "solution": "Write 'suggest that a locally deployed open-weight model is an alternative to rule-based extraction for registries that cannot send data outside the hospital'.",
+   "location": "d02:s5",
+   "quote": "is a powerful alternative to rule-based extraction",
+   "rule": "SKILL.md section 2 tone and word choice. Checklist A8",
+   "response": "pending"
+  },
+  {
+   "id": "d02-C2",
+   "axis": "evidence",
+   "severity": "minor",
+   "issue": "The comparison with the proprietary model (96.3% against 93.5%) crosses studies with different lesions, languages and labellers, and no test supports 'higher'.",
+   "solution": "Say 'a numerically higher accuracy' or drop the comparative and keep the difference in setting, which is the point of the paragraph.",
+   "location": "d02:s4",
+   "quote": "Our model reached a higher accuracy",
+   "rule": "checklist B4, verb strength. Discussion.md comparison with prior work",
+   "response": "pending"
+  },
+  {
+   "id": "d02-C3",
+   "axis": "evidence",
+   "severity": "nit",
+   "issue": "The two numbers from the rule-based study are different metrics (precision on all reports, accuracy on intermediate grades), which a reader may compare directly.",
+   "solution": "Keep both and name the subgroup, for example 'but 81.4% accuracy in the subgroup of reports with intermediate grades'.",
+   "location": "d02:s2",
+   "quote": "reached 97.1% precision at its development hospital",
+   "rule": "checklist D, numbers",
+   "response": "pending"
+  }
+ ],
+ "summary": "d02 closes thread T1 with a named comparison for each prior study, and both cited numbers match the full texts in Literature/fulltext/. One banned word must go, and the cross-study comparison needs a softer verb.",
+ "verdict": "minor",
+ "created_at": "2026-10-20T14:30:00+02:00",
+ "applied": false
+}

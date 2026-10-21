@@ -1,0 +1,44 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "task_id": "d03.standards-gate.r1",
+ "agent": "standards-gate",
+ "model": "inherit",
+ "effort": "high",
+ "objective": "Decide PASS or RETURN for the redrafted unit d03, with at most three blockers on RETURN.",
+ "context": [
+  "Central claim: An open-weight LLM run inside the hospital network extracts valvular heart disease severity from echocardiography reports more accurately than rule-based extraction and keeps its accuracy at a second centre, with the remaining errors concentrated in reports that grade a lesion between two categories.",
+  "Unit d03 takeaway: Accuracy held at centre B, which suggests transfer between similar hospitals rather than across health systems. It closes thread T2 (transfer to a second centre).",
+  "Previous unit d02 takeaway: the accuracy gain over rule-based extraction is consistent with prior work. Next unit d04 takeaway: errors cluster in intermediate grades.",
+  "Journal: lancet. Mode: co-thinker.",
+  "Accepted findings to verify: S1 number, S2 calibration, S3 Methods redundancy, S4 takeaway position."
+ ],
+ "inputs": [
+  "Thinking-space/units/d03.draft.md",
+  "Thinking-space/units/d03.logic.json",
+  "Thinking-space/handshakes/d03.synthesis.json",
+  "Thinking-space/skeleton.json",
+  "Thinking-space/spine.json",
+  "skills/scientific-writing/references/checklist.md",
+  "skills/scientific-writing/references/sections/discussion.md"
+ ],
+ "unit_text": "The second question was whether accuracy would hold at a centre whose reports played no part in prompt development. At centre B the model reached an accuracy of 95.8% (95% CI 93.9 to 97.5), close to the 96.3% of the combined test set. Clinical text models often lose accuracy when moved between hospitals because templates, abbreviations and grading habits differ [@vandermeer2024external]. The small difference between centres suggests that the prompt did not depend on the reporting habits of centre A, where it was developed. Because both centres are Swiss university hospitals, this result supports transfer between similar hospitals rather than across health systems.",
+ "constraints": [
+  "Judge the whole. Do not re-run the five axes in detail",
+  "Do not rewrite the paragraph"
+ ],
+ "output_contract": {
+  "envelope": "Thinking-space/handshakes/d03.standards-gate.r1.json"
+ },
+ "done_criteria": [
+  "verdict is PASS or RETURN",
+  "On RETURN at most three blocker or major findings with location and fix"
+ ],
+ "non_goals": [
+  "Style polish below the bar",
+  "Other units"
+ ],
+ "escalation": "If blocked, or a source is missing, return status blocked or a NEED in needs. Never guess.",
+ "dispatched_at": "2026-10-21T09:34:00+02:00",
+ "mode": "co-thinker",
+ "journal": "lancet"
+}

@@ -1,0 +1,108 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi brief",
+ "type": "object",
+ "required": [
+  "task_id",
+  "agent",
+  "objective",
+  "context",
+  "inputs",
+  "constraints",
+  "output_contract",
+  "done_criteria",
+  "non_goals",
+  "escalation",
+  "dispatched_at"
+ ],
+ "properties": {
+  "task_id": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9-]*[.][a-z-]+[.]r[0-9]+$",
+   "description": "<unit>.<agent>.r<round>, e.g. p04.flow-checker.r1"
+  },
+  "agent": {
+   "type": "string"
+  },
+  "model": {
+   "type": "string"
+  },
+  "effort": {
+   "type": "string",
+   "enum": [
+    "low",
+    "medium",
+    "high",
+    "max"
+   ]
+  },
+  "objective": {
+   "type": "string"
+  },
+  "context": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "2 to 5 facts the agent cannot see"
+  },
+  "inputs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "exact paths, absolute or workspace-relative"
+  },
+  "unit_text": {
+   "type": "string",
+   "description": "the unit pasted inline when the agent must not depend on locating it"
+  },
+  "constraints": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "output_contract": {
+   "type": "object",
+   "required": [
+    "envelope"
+   ],
+   "properties": {
+    "envelope": {
+     "type": "string"
+    },
+    "artifacts": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "done_criteria": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "non_goals": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "escalation": {
+   "type": "string"
+  },
+  "dispatched_at": {
+   "type": "string"
+  },
+  "mode": {
+   "type": "string"
+  },
+  "journal": {
+   "type": "string"
+  }
+ }
+}

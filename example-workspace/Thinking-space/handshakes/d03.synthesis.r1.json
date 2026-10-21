@@ -1,0 +1,90 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "unit_id": "d03",
+ "round": 1,
+ "reviewed_envelopes": [
+  "Thinking-space/handshakes/d03.flow-checker.r1.json",
+  "Thinking-space/handshakes/d03.local-aligner.r1.json",
+  "Thinking-space/handshakes/d03.global-aligner.r1.json",
+  "Thinking-space/handshakes/d03.evidence-checker.r1.json",
+  "Thinking-space/handshakes/d03.style-checker.r1.json"
+ ],
+ "findings": [
+  {
+   "id": "S1",
+   "axis": "global",
+   "severity": "blocker",
+   "issue": "Centre B accuracy is 95.4% in d03 but 95.8% in results.md and R4.",
+   "solution": "Use 95.8% (95% CI 93.9 to 97.5).",
+   "location": "d03:s3",
+   "rule": "checklist D9. Merges G1 and E1",
+   "response": "accept",
+   "response_note": "Number copied from an earlier results draft. Results.md is the source of truth."
+  },
+  {
+   "id": "S2",
+   "axis": "global",
+   "severity": "major",
+   "issue": "'Confirms' and 'generalises across Swiss university hospitals' exceed two centres in one health system.",
+   "solution": "Use 'suggests' and scope the implication to similar hospitals (I2).",
+   "location": "d03:s5",
+   "rule": "checklist B4 and B7. Merges G2, E2, S1 (style)",
+   "response": "accept",
+   "response_note": "Human agreed in co-thinker gate: option B (hedged, scoped) over option A (cut the interpretation)."
+  },
+  {
+   "id": "S3",
+   "axis": "local",
+   "severity": "major",
+   "issue": "Sentence 2 re-narrates the Methods split and adds 'three rounds', which is not in Methods or Results.",
+   "solution": "Cut the sentence.",
+   "location": "d03:s2",
+   "rule": "organization.md section 7. Checklist N. Merges L1 and G3",
+   "response": "accept",
+   "response_note": "The split lives in m02. The human confirmed 'three rounds' was not meant to be reported."
+  },
+  {
+   "id": "S4",
+   "axis": "flow",
+   "severity": "major",
+   "issue": "The paragraph ends on the language and software of the centres rather than its takeaway, and that subject belongs to d05.",
+   "solution": "Cut s6 here and end on the scoped interpretation.",
+   "location": "d03:s6",
+   "rule": "checklist A3, discursus C3 and C4. Merges F1, F2, L2",
+   "response": "accept",
+   "response_note": "d05 sentence 3 already states the language limitation."
+  },
+  {
+   "id": "S5",
+   "axis": "flow",
+   "severity": "nit",
+   "issue": "Alternative order opening with the cited expectation.",
+   "solution": "Keep the current opener.",
+   "location": "d03:s1",
+   "rule": "discursus C2",
+   "response": "reject",
+   "response_note": "The opener carries the bridge from d02 (rule C2). The flow-checker itself found the alternative reads worse."
+  },
+  {
+   "id": "S6",
+   "axis": "evidence",
+   "severity": "minor",
+   "issue": "@vandermeer2024external cannot be verified without its full text.",
+   "solution": "Keep the citation. Verify once the full text is added.",
+   "location": "d03:s4",
+   "rule": "evidence-checker step 2",
+   "response": "defer",
+   "response_note": "NEED carried to STATE.open_needs and noted on skeleton unit d03."
+  }
+ ],
+ "accepted_count": 4,
+ "rejected_count": 1,
+ "deferred_count": 1,
+ "needs": [
+  "NEED: full text of @vandermeer2024external (Literature/fulltext/vandermeer2024external.pdf or .md)"
+ ],
+ "decided_by": "both",
+ "next": "draft",
+ "notes": "Co-thinker gate. Two options shown for S2 with option B picked. The NEED does not block drafting because the sentence is background with a citation.",
+ "created_at": "2026-10-21T09:25:00+02:00"
+}

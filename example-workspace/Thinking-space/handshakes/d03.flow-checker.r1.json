@@ -1,0 +1,44 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "task_id": "d03.flow-checker.r1",
+ "agent_id": "flow-checker",
+ "model": "sonnet",
+ "status": "done",
+ "result": "d03 has one point (accuracy at the external centre) and a clear opener, but it ends on a detail about language and software instead of its takeaway, and the step from the interpretation to that detail has no relation. The second sentence repeats a procedure and does not advance the point. I tried the alternative order s4, s1, s3, s5 (field expectation first). It reads worse, because the opener then no longer connects to the d02 takeaway.",
+ "evidence": [
+  "Thinking-space/units/d03.logic.json",
+  "unit_text"
+ ],
+ "findings": [
+  {
+   "id": "F1",
+   "axis": "flow",
+   "severity": "major",
+   "issue": "The last sentence states the language and reporting software of the centres, so the paragraph ends on a detail rather than its takeaway.",
+   "solution": "End on the interpretation of the centre B result at the strength the design allows, and move the language detail out.",
+   "location": "d03:s6",
+   "rule": "checklist A3, discursus C3",
+   "quote": "Both centres write their reports in German"
+  },
+  {
+   "id": "F2",
+   "axis": "flow",
+   "severity": "minor",
+   "issue": "Step c6 to c7 has no relation, a zig-zag from interpretation to a new subject.",
+   "solution": "Cut s6 here, or turn it into a qualification placed before the takeaway.",
+   "location": "d03:s5-s6",
+   "rule": "discursus C4"
+  },
+  {
+   "id": "F3",
+   "axis": "flow",
+   "severity": "nit",
+   "issue": "Alternative order considered: open with the cited expectation (s4) and then the result.",
+   "solution": "Keep the current opener. The alternative breaks the bridge from d02.",
+   "location": "d03:s1",
+   "rule": "discursus C2"
+  }
+ ],
+ "needs": [],
+ "returned_at": "2026-10-21T09:14:00+02:00"
+}

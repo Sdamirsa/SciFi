@@ -1,0 +1,138 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi synthesis",
+ "type": "object",
+ "required": [
+  "unit_id",
+  "round",
+  "reviewed_envelopes",
+  "findings",
+  "decided_by",
+  "next"
+ ],
+ "properties": {
+  "unit_id": {
+   "type": "string"
+  },
+  "round": {
+   "type": "integer"
+  },
+  "reviewed_envelopes": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "findings": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "severity",
+     "issue",
+     "solution",
+     "location"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "axis": {
+      "type": "string",
+      "enum": [
+       "flow",
+       "local",
+       "global",
+       "evidence",
+       "style",
+       "logic",
+       "figure",
+       "gate",
+       "other"
+      ]
+     },
+     "severity": {
+      "type": "string",
+      "enum": [
+       "blocker",
+       "major",
+       "minor",
+       "nit"
+      ]
+     },
+     "issue": {
+      "type": "string"
+     },
+     "solution": {
+      "type": "string"
+     },
+     "location": {
+      "type": "string",
+      "description": "unit id plus sentence number or a short quote, e.g. p04:s3"
+     },
+     "quote": {
+      "type": "string",
+      "description": "at most 12 words of the offending text"
+     },
+     "rule": {
+      "type": "string",
+      "description": "standards reference, e.g. checklist C2 or results.md paragraph template"
+     },
+     "response": {
+      "type": "string",
+      "enum": [
+       "accept",
+       "reject",
+       "defer",
+       "pending"
+      ]
+     },
+     "response_note": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "accepted_count": {
+   "type": "integer"
+  },
+  "rejected_count": {
+   "type": "integer"
+  },
+  "deferred_count": {
+   "type": "integer"
+  },
+  "needs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "decided_by": {
+   "type": "string",
+   "enum": [
+    "human",
+    "master",
+    "both"
+   ]
+  },
+  "next": {
+   "type": "string",
+   "enum": [
+    "draft",
+    "redraft",
+    "gate",
+    "human",
+    "accept",
+    "blocked"
+   ]
+  },
+  "notes": {
+   "type": "string"
+  },
+  "created_at": {
+   "type": "string"
+  }
+ }
+}

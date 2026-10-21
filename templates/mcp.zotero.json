@@ -1,0 +1,12 @@
+{
+  "_comment": "Optional. Merge the mcpServers entry into your project's .mcp.json to give SciFi the Zotero MCP literature route (zotero-mcp by 54yyyu, MIT; install with: pip install zotero-mcp-server). ZOTERO_LOCAL=true reads your local Zotero database, so Zotero must be running on this machine. Without it SciFi uses Literature/library.json (Better BibTeX export) and Literature/fulltext/. Setup for both routes: docs/zotero-guide.md.",
+  "mcpServers": {
+    "zotero": {
+      "command": "zotero-mcp",
+      "args": [],
+      "env": {
+        "ZOTERO_LOCAL": "true"
+      }
+    }
+  }
+}

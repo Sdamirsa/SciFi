@@ -1,0 +1,51 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "task_id": "d03.evidence-checker.r1",
+ "agent_id": "evidence-checker",
+ "model": "sonnet",
+ "status": "partial",
+ "result": "c3 does not match its result (R4 is 95.8%). c6 is overstated: 'confirms' needs an independent dataset, and centre B shares language, software and health system with centre A. The citation for c5, @vandermeer2024external, is in library.json but has no full text in Literature/fulltext/, so I could not check it and raise a NEED.",
+ "evidence": [
+  "Thinking-space/units/d03.logic.json",
+  "Thinking-space/spine.json",
+  "Manuscript/results.md",
+  "Literature/library.json",
+  "Literature/fulltext/ (listed, vandermeer2024external absent)"
+ ],
+ "findings": [
+  {
+   "id": "E1",
+   "axis": "evidence",
+   "severity": "blocker",
+   "issue": "c3 (95.4%) does not match R4 (95.8%).",
+   "solution": "Use the R4 value.",
+   "location": "d03:s3",
+   "rule": "checklist D9"
+  },
+  {
+   "id": "E2",
+   "axis": "evidence",
+   "severity": "major",
+   "issue": "c6 is overstated. 'Confirms' implies an independent replication, and the generalisation claim has no evidence beyond one similar centre.",
+   "solution": "Use 'suggests' and limit the scope to similar hospitals.",
+   "location": "d03:s5",
+   "rule": "checklist B4, verb strength"
+  },
+  {
+   "id": "E3",
+   "axis": "evidence",
+   "severity": "minor",
+   "issue": "c5 cites @vandermeer2024external, whose full text is not available, so the claim is unverified.",
+   "solution": "Keep the citation and supply the full text. Verify before submission.",
+   "location": "d03:s4",
+   "rule": "evidence-checker step 2"
+  }
+ ],
+ "needs": [
+  "NEED: full text of @vandermeer2024external (Literature/fulltext/vandermeer2024external.pdf or .md)"
+ ],
+ "uncertainties": [
+  "c5 status is need, not unsupported. The source may well say this."
+ ],
+ "returned_at": "2026-10-21T09:14:00+02:00"
+}

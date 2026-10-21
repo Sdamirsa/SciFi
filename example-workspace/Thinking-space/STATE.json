@@ -1,0 +1,42 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "workspace": "example-workspace",
+ "mode": "co-thinker",
+ "journal": "lancet",
+ "stage": "paragraphs",
+ "current_unit": "d03",
+ "units": {
+  "a01": "mapped",
+  "i01": "mapped",
+  "i02": "mapped",
+  "i03": "mapped",
+  "i04": "mapped",
+  "m01": "mapped",
+  "m02": "mapped",
+  "m03": "mapped",
+  "m04": "mapped",
+  "m05": "mapped",
+  "m06": "mapped",
+  "r01": "mapped",
+  "r02": "mapped",
+  "r03": "mapped",
+  "d01": "mapped",
+  "d02": "reviewed",
+  "d03": "accepted",
+  "d04": "mapped",
+  "d05": "mapped",
+  "d06": "mapped",
+  "c01": "planned",
+  "c02": "planned",
+  "c03": "planned",
+  "c04": "planned"
+ },
+ "open_needs": [
+  "NEED: full text of @vandermeer2024external (Literature/fulltext/vandermeer2024external.pdf or .md)"
+ ],
+ "next_action": "Human: copy the accepted d03 draft from Thinking-space/units/d03.draft.md into paragraph 3 of Manuscript/discussion.md, resolve the three pending comments in Thinking-space/comments/d02.json, and add the vandermeer2024external full text. Then run the paragraph loop on d04.",
+ "literature_route": "bbt-export",
+ "updated_at": "2026-10-21T09:45:00+02:00",
+ "session_count": 3,
+ "last_ritual": "2026-10-20"
+}

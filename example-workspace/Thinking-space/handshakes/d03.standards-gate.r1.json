@@ -1,0 +1,29 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "task_id": "d03.standards-gate.r1",
+ "agent_id": "standards-gate",
+ "model": "inherit",
+ "status": "done",
+ "verdict": "PASS",
+ "result": "PASS. The paragraph has one point, opens on the question of thread T2, reports the centre B value exactly as results.md, interprets it with 'suggests' and ends on a scoped takeaway that matches I2. All four accepted findings are implemented and nothing else changed. One residual item, the unverified citation, is a NEED for the human rather than a defect of the text.",
+ "evidence": [
+  "Thinking-space/units/d03.draft.md",
+  "Thinking-space/units/d03.logic.json",
+  "Thinking-space/handshakes/d03.synthesis.json",
+  "Thinking-space/spine.json",
+  "skills/scientific-writing/references/checklist.md B, D, I"
+ ],
+ "findings": [
+  {
+   "id": "G1",
+   "axis": "gate",
+   "severity": "minor",
+   "issue": "The citation in sentence 3 is still unverified (deferred S6).",
+   "solution": "Verify @vandermeer2024external against its methods and results once the full text is in Literature/fulltext/.",
+   "location": "d03:s3",
+   "rule": "checklist D7"
+  }
+ ],
+ "needs": [],
+ "returned_at": "2026-10-21T09:38:00+02:00"
+}

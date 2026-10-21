@@ -1,0 +1,158 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi display-item plan",
+ "type": "object",
+ "required": [
+  "items",
+  "status"
+ ],
+ "properties": {
+  "items": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "role",
+     "shows",
+     "cited_from",
+     "status"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "F1, F2, T1, S1"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "figure",
+       "table",
+       "supplementary-figure",
+       "supplementary-table",
+       "panel",
+       "box"
+      ]
+     },
+     "role": {
+      "type": "string",
+      "enum": [
+       "overview",
+       "flow",
+       "primary",
+       "secondary",
+       "robustness",
+       "example",
+       "error",
+       "characteristics",
+       "specification",
+       "taxonomy",
+       "evidence-map",
+       "recommendation"
+      ]
+     },
+     "type": {
+      "type": "string",
+      "description": "bar, forest, KM, ROC, calibration, heat map, schematic, grid, ..."
+     },
+     "shows": {
+      "type": "string"
+     },
+     "results": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "panels": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "letter",
+        "shows"
+       ],
+       "properties": {
+        "letter": {
+         "type": "string"
+        },
+        "shows": {
+         "type": "string"
+        },
+        "n": {
+         "type": "string"
+        },
+        "stat": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "cited_from": {
+      "type": "string"
+     },
+     "data_source": {
+      "type": "string"
+     },
+     "encoding": {
+      "type": "string"
+     },
+     "numbers_on_figure": {
+      "type": "string"
+     },
+     "caption": {
+      "type": "string"
+     },
+     "script": {
+      "type": "string"
+     },
+     "alternatives_considered": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "brainstormed",
+       "chosen",
+       "drafted",
+       "made",
+       "accepted"
+      ]
+     }
+    }
+   }
+  },
+  "rejected": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "idea",
+     "why"
+    ],
+    "properties": {
+     "idea": {
+      "type": "string"
+     },
+     "why": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "draft",
+    "agreed"
+   ]
+  },
+  "updated_at": {
+   "type": "string"
+  }
+ }
+}

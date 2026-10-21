@@ -1,0 +1,83 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi state",
+ "type": "object",
+ "required": [
+  "workspace",
+  "mode",
+  "journal",
+  "stage",
+  "next_action",
+  "updated_at"
+ ],
+ "properties": {
+  "workspace": {
+   "type": "string"
+  },
+  "mode": {
+   "type": "string",
+   "enum": [
+    "co-thinker",
+    "human-on-the-loop",
+    "human-in-the-loop",
+    "fully-automated"
+   ]
+  },
+  "journal": {
+   "type": "string"
+  },
+  "stage": {
+   "type": "string",
+   "enum": [
+    "init",
+    "spine",
+    "skeleton",
+    "figures",
+    "paragraphs",
+    "review",
+    "done"
+   ]
+  },
+  "current_unit": {
+   "type": "string"
+  },
+  "units": {
+   "type": "object",
+   "description": "unit id to status"
+  },
+  "open_needs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "pointer": {
+   "type": "string",
+   "description": "mid-turn pointer written by the stop hook"
+  },
+  "next_action": {
+   "type": "string"
+  },
+  "literature_route": {
+   "type": "string",
+   "enum": [
+    "zotero-mcp",
+    "bbt-export",
+    "none"
+   ]
+  },
+  "updated_at": {
+   "type": "string"
+  },
+  "session_count": {
+   "type": "integer"
+  },
+  "last_ritual": {
+   "type": "string"
+  },
+  "pointer_at": {
+   "type": "string",
+   "description": "ISO time the stop hook wrote the pointer"
+  }
+ }
+}

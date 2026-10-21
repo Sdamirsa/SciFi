@@ -1,0 +1,22 @@
+{
+  "name": "scifi",
+  "owner": {
+    "name": "Seyed Amir Ahmad Safavi-Naini",
+    "url": "https://github.com/Sdamirsa"
+  },
+  "metadata": {
+    "description": "SciFi: Science, Figures, Inference. A Claude Code plugin for scientific manuscripts.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "scifi",
+      "source": "./",
+      "description": "Write, revise and evaluate scientific manuscripts with a spine, a skeleton, a paragraph loop of isolated checks and a standards gate.",
+      "version": "0.1.0",
+      "author": {"name": "Seyed Amir Ahmad Safavi-Naini"},
+      "license": "MIT",
+      "keywords": ["scientific-writing", "manuscript", "peer-review"]
+    }
+  ]
+}

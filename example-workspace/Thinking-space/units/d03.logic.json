@@ -1,0 +1,203 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "unit_id": "d03",
+ "section": "discussion",
+ "source": "extracted",
+ "point": "accuracy held at the external centre",
+ "takeaway": "As written, the last sentence states the language and software of the centres, not the takeaway.",
+ "context_opener": "Restates the question of thread T2, whether accuracy holds at a centre not used for development.",
+ "thread": "T2",
+ "skeleton_ref": "skeleton.json discussion d03",
+ "claims": [
+  {
+   "id": "c1",
+   "text": "The question was whether accuracy holds at a centre not used for prompt development.",
+   "kind": "gap",
+   "sentence": 1,
+   "evidence": [
+    {
+     "kind": "none",
+     "ref": "-",
+     "status": "unverified",
+     "note": "orienting question that restates the gap opened in i03"
+    }
+   ],
+   "strength": "certain",
+   "thread": "T2"
+  },
+  {
+   "id": "c2",
+   "text": "Prompts were revised over three rounds on 200 centre A reports, and centre B reports were seen only at test time.",
+   "kind": "method",
+   "sentence": 2,
+   "evidence": [
+    {
+     "kind": "none",
+     "ref": "-",
+     "status": "unverified",
+     "note": "repeats methods.md Data source and population, and 'three rounds' appears in neither methods.md nor results.md"
+    }
+   ],
+   "strength": "certain",
+   "thread": "T2"
+  },
+  {
+   "id": "c3",
+   "text": "At centre B the model reached an accuracy of 95.4% (95% CI 93.9 to 97.5).",
+   "kind": "finding",
+   "sentence": 3,
+   "evidence": [
+    {
+     "kind": "result",
+     "ref": "R4",
+     "status": "unverified",
+     "note": "R4 states 95.8% (95% CI 93.9 to 97.5)"
+    }
+   ],
+   "strength": "certain",
+   "thread": "T2",
+   "verbs": [
+    "reached"
+   ]
+  },
+  {
+   "id": "c4",
+   "text": "The centre B estimate lies within the interval of the overall estimate.",
+   "kind": "comparison",
+   "sentence": 3,
+   "evidence": [
+    {
+     "kind": "result",
+     "ref": "R2",
+     "status": "unverified"
+    },
+    {
+     "kind": "logic",
+     "ref": "c3",
+     "status": "unverified"
+    }
+   ],
+   "strength": "strong",
+   "thread": "T2",
+   "verbs": [
+    "lies within"
+   ]
+  },
+  {
+   "id": "c5",
+   "text": "Clinical text models often lose accuracy at other hospitals because templates, abbreviations and grading habits differ.",
+   "kind": "background",
+   "sentence": 4,
+   "evidence": [
+    {
+     "kind": "citation",
+     "ref": "@vandermeer2024external",
+     "status": "unverified"
+    }
+   ],
+   "strength": "moderate",
+   "thread": "T2"
+  },
+  {
+   "id": "c6",
+   "text": "The result confirms that an open-weight model without fine-tuning generalises across Swiss university hospitals.",
+   "kind": "interpretation",
+   "sentence": 5,
+   "evidence": [
+    {
+     "kind": "logic",
+     "ref": "c3",
+     "status": "unverified"
+    },
+    {
+     "kind": "logic",
+     "ref": "c5",
+     "status": "unverified"
+    }
+   ],
+   "strength": "certain",
+   "thread": "T2",
+   "verbs": [
+    "confirms",
+    "generalises"
+   ]
+  },
+  {
+   "id": "c7",
+   "text": "Both centres write reports in German and use the same reporting software.",
+   "kind": "limitation",
+   "sentence": 6,
+   "evidence": [
+    {
+     "kind": "none",
+     "ref": "-",
+     "status": "unverified",
+     "note": "not in methods.md or results.md. D05 already states the language"
+    }
+   ],
+   "strength": "certain",
+   "thread": "T2"
+  }
+ ],
+ "steps": [
+  {
+   "from": "c1",
+   "to": "c2",
+   "relation": "supports",
+   "note": "sets up why centre B is a fair test"
+  },
+  {
+   "from": "c2",
+   "to": "c3",
+   "relation": "supports"
+  },
+  {
+   "from": "c3",
+   "to": "c4",
+   "relation": "extends"
+  },
+  {
+   "from": "c4",
+   "to": "c5",
+   "relation": "contrasts",
+   "note": "the result against the usual loss of accuracy"
+  },
+  {
+   "from": "c5",
+   "to": "c6",
+   "relation": "contrasts"
+  },
+  {
+   "from": "c6",
+   "to": "c7",
+   "relation": "none",
+   "note": "new subject after the interpretation. The paragraph ends on a detail"
+  }
+ ],
+ "numbers": [
+  {
+   "value": "95.4%",
+   "ref": "R4",
+   "matches_results": false
+  },
+  {
+   "value": "93.9 to 97.5",
+   "ref": "R4",
+   "matches_results": true
+  },
+  {
+   "value": "200 reports",
+   "ref": "spine.design",
+   "matches_results": true
+  },
+  {
+   "value": "three rounds",
+   "ref": "none",
+   "matches_results": false
+  }
+ ],
+ "word_count": 114,
+ "sentence_count": 6,
+ "created_by": "d03.logic-mapper.r1",
+ "created_at": "2026-10-21T09:05:00+02:00"
+}

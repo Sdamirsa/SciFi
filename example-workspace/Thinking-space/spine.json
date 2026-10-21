@@ -1,0 +1,127 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "central_claim": "An open-weight LLM run inside the hospital network extracts valvular heart disease severity from echocardiography reports more accurately than rule-based extraction and keeps its accuracy at a second centre, with the remaining errors concentrated in reports that grade a lesion between two categories.",
+ "alternatives": [
+  {
+   "text": "An open-weight LLM extracts valvular heart disease severity more accurately than a rule-based system at two centres.",
+   "why_not": "Conservative. True but reads as better numbers only, and drops the error finding that tells registries what to fix."
+  },
+  {
+   "text": "Locally deployed open-weight LLMs can replace manual abstraction for valvular heart disease registries.",
+   "why_not": "Bold. The study measured report-level accuracy retrospectively, not registry completeness or staff time, so the design cannot carry it."
+  }
+ ],
+ "gap": "Whether an open-weight LLM run inside the hospital can extract valvular heart disease severity accurately, and keep that accuracy at a centre not used for development, is not known.",
+ "aim": "To compare an open-weight LLM run on hospital hardware with a rule-based system for extracting valvular heart disease severity from echocardiography reports at two Swiss centres, against cardiologist labels.",
+ "design": "Retrospective two-centre study of 1,200 consecutive transthoracic echocardiography reports (2022 to 2023). Prompts were developed on 200 reports from centre A and tested on 1,000 reports from both centres. Two cardiologists with consensus adjudication formed the reference standard. A 70-billion-parameter open-weight model was used without fine-tuning, with bootstrap 95% CIs.",
+ "results": [
+  {
+   "id": "R1",
+   "statement": "The two cardiologists agreed on 94.1% of lesion grades before consensus (kappa 0.89, 95% CI 0.86 to 0.92).",
+   "display": "T1",
+   "source": "results.md, Study population and reference standard"
+  },
+  {
+   "id": "R2",
+   "statement": "The LLM achieved an accuracy of 96.3% (95% CI 95.1 to 97.4) compared with 88.7% (87.0 to 90.4) for the rule-based system.",
+   "display": "F3, T2",
+   "source": "results.md, Extraction accuracy"
+  },
+  {
+   "id": "R3",
+   "statement": "The difference in accuracy was 7.6 percentage points (95% CI 5.8 to 9.4).",
+   "display": "T2",
+   "source": "results.md, Extraction accuracy"
+  },
+  {
+   "id": "R4",
+   "statement": "At centre B, not used for prompt development, the LLM reached an accuracy of 95.8% (95% CI 93.9 to 97.5).",
+   "display": "F3",
+   "source": "results.md, Extraction accuracy"
+  },
+  {
+   "id": "R5",
+   "statement": "Mean processing time was 4.1 s per report.",
+   "display": "T2",
+   "source": "results.md, Extraction accuracy"
+  },
+  {
+   "id": "R6",
+   "statement": "Of 37 LLM errors, 24 (64.9%) occurred in reports that graded a lesion between two categories.",
+   "display": "T2, S1",
+   "source": "results.md, Error analysis"
+  }
+ ],
+ "implications": [
+  {
+   "id": "I1",
+   "statement": "An open-weight model run inside the hospital is an alternative to rule-based extraction where reports cannot leave the network.",
+   "strength": "moderate"
+  },
+  {
+   "id": "I2",
+   "statement": "Accuracy may transfer between hospitals with similar reporting habits without new prompt development.",
+   "strength": "hedged"
+  },
+  {
+   "id": "I3",
+   "statement": "Allowing an intermediate grade, or standardising report templates, may reduce errors more than further prompt tuning.",
+   "strength": "hedged"
+  },
+  {
+   "id": "I4",
+   "statement": "Prospective validation within a registry workflow should precede routine use.",
+   "strength": "strong"
+  }
+ ],
+ "threads": [
+  {
+   "id": "T1",
+   "name": "Accuracy against rule-based extraction",
+   "opens": "i02: rule-based systems miss grades phrased in unexpected ways, and LLMs can read varied phrasing.",
+   "results": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "closes": "d02 (I1)",
+   "status": "closed"
+  },
+  {
+   "id": "T2",
+   "name": "Transfer to a second centre",
+   "opens": "i03: whether an LLM run inside the hospital keeps its accuracy at a second centre is not known.",
+   "results": [
+    "R4"
+   ],
+   "closes": "d03 (I2)",
+   "limitation": "Both centres write in German within one health system (d05).",
+   "status": "closed"
+  },
+  {
+   "id": "T3",
+   "name": "Where the errors remain",
+   "opens": "i04: guideline grading leaves intermediate categories undefined for several lesions.",
+   "results": [
+    "R6"
+   ],
+   "closes": "d04 (I3)",
+   "status": "closed"
+  },
+  {
+   "id": "T4",
+   "name": "Local deployment for registries",
+   "opens": "i01: registries depend on severity grades abstracted by hand from free-text reports.",
+   "results": [
+    "R2",
+    "R5"
+   ],
+   "closes": "d06 (I4)",
+   "limitation": "Retrospective design, no measure of registry completeness (d05).",
+   "status": "closed"
+  }
+ ],
+ "status": "agreed",
+ "decided_by": "human",
+ "updated_at": "2026-10-19T11:20:00+02:00"
+}

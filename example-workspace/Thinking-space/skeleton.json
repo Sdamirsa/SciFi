@@ -1,0 +1,240 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "journal": "lancet",
+ "word_budget": {
+  "abstract": 300,
+  "introduction": 450,
+  "methods": 700,
+  "results": 350,
+  "discussion": 900
+ },
+ "sections": [
+  {
+   "section": "abstract",
+   "target_words": 300,
+   "units": [
+    {
+     "id": "a01",
+     "takeaway": "An open-weight LLM run inside the hospital extracted severity more accurately than a rule-based system and held its accuracy at a second centre.",
+     "does": "summarises the study in Background, Methods, Findings, Interpretation, Funding and the Research in context panel",
+     "thread": "T1",
+     "status": "mapped",
+     "target_words": 300
+    }
+   ]
+  },
+  {
+   "section": "introduction",
+   "target_words": 450,
+   "units": [
+    {
+     "id": "i01",
+     "takeaway": "Valve disease registries depend on severity grades abstracted by hand from free-text reports.",
+     "does": "states the clinical stake",
+     "thread": "T4",
+     "status": "mapped",
+     "target_words": 100
+    },
+    {
+     "id": "i02",
+     "takeaway": "Rule-based extraction misses varied phrasing, and LLMs can read it.",
+     "does": "names current practice and the enabling idea",
+     "thread": "T1",
+     "status": "mapped",
+     "target_words": 100
+    },
+    {
+     "id": "i03",
+     "takeaway": "Proprietary models cannot be used where reports must stay inside the hospital, and transfer to a second centre is untested.",
+     "does": "states the gap",
+     "thread": "T2",
+     "status": "mapped",
+     "target_words": 110
+    },
+    {
+     "id": "i04",
+     "takeaway": "We compared a locally run open-weight LLM with a rule-based system at two centres and classified the remaining errors.",
+     "does": "states the aim, the primary outcome and why errors were classified",
+     "thread": "T3",
+     "status": "mapped",
+     "target_words": 90
+    }
+   ]
+  },
+  {
+   "section": "methods",
+   "target_words": 700,
+   "units": [
+    {
+     "id": "m01",
+     "takeaway": "Retrospective two-centre study with ethics approval, consent waiver and TRIPOD-LLM reporting.",
+     "does": "states design, ethics and the reporting guideline",
+     "thread": "T4",
+     "status": "mapped"
+    },
+    {
+     "id": "m02",
+     "takeaway": "Prompts were developed on 200 reports from centre A and tested on 1,000 reports from both centres.",
+     "does": "defines the data and the split",
+     "thread": "T2",
+     "status": "mapped",
+     "display": "F2",
+     "keep_here": "the development and test split, including the separation of centre B"
+    },
+    {
+     "id": "m03",
+     "takeaway": "Two cardiologists labelled every lesion independently with consensus adjudication.",
+     "does": "defines the reference standard",
+     "thread": "T1",
+     "status": "mapped"
+    },
+    {
+     "id": "m04",
+     "takeaway": "A 70-billion-parameter open-weight model was prompted without fine-tuning and compared with the rule-based system in use.",
+     "does": "describes the model and the comparator",
+     "thread": "T1",
+     "status": "mapped"
+    },
+    {
+     "id": "m05",
+     "takeaway": "Per-lesion accuracy was the primary outcome, with accuracy at centre B, time per report and an error taxonomy as secondary outcomes.",
+     "does": "defines outcomes and metrics",
+     "thread": "T3",
+     "status": "mapped"
+    },
+    {
+     "id": "m06",
+     "takeaway": "Accuracy and differences carry bootstrap 95% CIs, and the funder had no role.",
+     "does": "states the statistical analysis and the role of the funding source",
+     "thread": "T1",
+     "status": "mapped"
+    }
+   ]
+  },
+  {
+   "section": "results",
+   "target_words": 350,
+   "units": [
+    {
+     "id": "r01",
+     "takeaway": "1,000 test reports from two centres were analysed, and cardiologist agreement was high.",
+     "does": "describes the population and the reference standard",
+     "thread": "T1",
+     "status": "mapped",
+     "display": "F1, F2, T1"
+    },
+    {
+     "id": "r02",
+     "takeaway": "The LLM was more accurate than the rule-based system, including at centre B.",
+     "does": "reports the primary and key secondary results",
+     "thread": "T2",
+     "status": "mapped",
+     "display": "F3, T2"
+    },
+    {
+     "id": "r03",
+     "takeaway": "Most LLM errors occurred in reports that graded a lesion between two categories.",
+     "does": "reports the error analysis",
+     "thread": "T3",
+     "status": "mapped",
+     "display": "T2, S1"
+    }
+   ]
+  },
+  {
+   "section": "discussion",
+   "target_words": 900,
+   "units": [
+    {
+     "id": "d01",
+     "takeaway": "A locally run open-weight LLM extracted severity more accurately than rule-based extraction and held at a second centre.",
+     "does": "states the principal findings without citations",
+     "thread": "T1",
+     "status": "mapped",
+     "target_words": 120
+    },
+    {
+     "id": "d02",
+     "takeaway": "The accuracy gain over rule-based extraction is consistent with prior work and is reached without data leaving the hospital.",
+     "does": "closes T1 by comparison with prior studies",
+     "thread": "T1",
+     "status": "reviewed",
+     "target_words": 130
+    },
+    {
+     "id": "d03",
+     "takeaway": "Accuracy held at centre B, which suggests transfer between similar hospitals rather than across health systems.",
+     "does": "closes T2 with the external-centre result and its scope",
+     "thread": "T2",
+     "status": "accepted",
+     "target_words": 110,
+     "keep_here": "centre B accuracy and its interpretation",
+     "defer": "Language and reporting software of the two centres go to d05. Verify @vandermeer2024external once its full text is added (NEED from d03.evidence-checker.r1)."
+    },
+    {
+     "id": "d04",
+     "takeaway": "Errors cluster in intermediate grades, so the output schema or the report template is the next lever.",
+     "does": "closes T3 with a hedged explanation and a rival explanation",
+     "thread": "T3",
+     "status": "mapped",
+     "target_words": 120
+    },
+    {
+     "id": "d05",
+     "takeaway": "The reference standard, one language, one model and the retrospective design bound the claim.",
+     "does": "states the limitations, most important first",
+     "thread": "T4",
+     "status": "mapped",
+     "target_words": 170
+    },
+    {
+     "id": "d06",
+     "takeaway": "A locally run open-weight LLM could support registries once validated prospectively.",
+     "does": "concludes at design strength and names the condition for use",
+     "thread": "T4",
+     "status": "mapped",
+     "target_words": 100
+    }
+   ]
+  },
+  {
+   "section": "captions",
+   "units": [
+    {
+     "id": "c01",
+     "takeaway": "Figure 1 shows the path from report to registry field for both systems.",
+     "does": "captions the overview figure",
+     "thread": "T4",
+     "status": "planned",
+     "display": "F1"
+    },
+    {
+     "id": "c02",
+     "takeaway": "Figure 2 shows how 1,200 reports became the development and test sets.",
+     "does": "captions the flow diagram",
+     "thread": "T2",
+     "status": "planned",
+     "display": "F2"
+    },
+    {
+     "id": "c03",
+     "takeaway": "Figure 3 shows accuracy with 95% CI per lesion, system and centre.",
+     "does": "captions the primary result figure",
+     "thread": "T1",
+     "status": "planned",
+     "display": "F3"
+    },
+    {
+     "id": "c04",
+     "takeaway": "Table 2 gives accuracy, the difference, processing time and errors by category.",
+     "does": "captions the performance table",
+     "thread": "T3",
+     "status": "planned",
+     "display": "T2"
+    }
+   ]
+  }
+ ],
+ "status": "agreed",
+ "updated_at": "2026-10-21T09:45:00+02:00"
+}

@@ -1,0 +1,206 @@
+[
+ {
+  "id": "okafor2023registry",
+  "type": "article-journal",
+  "title": "Manual abstraction delays and gaps in a national valvular heart disease registry",
+  "author": [
+   {
+    "family": "Okafor",
+    "given": "Chiamaka"
+   },
+   {
+    "family": "Weber",
+    "given": "Lukas"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "container-title": "European Journal of Registry Science",
+  "DOI": "10.0000/scifi.example.001",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "rossi2023prevalence",
+  "type": "article-journal",
+  "title": "Prevalence of moderate or severe valvular heart disease in adults over 65 years: a population echocardiography survey",
+  "author": [
+   {
+    "family": "Rossi",
+    "given": "Giulia"
+   },
+   {
+    "family": "Hartmann",
+    "given": "Peter"
+   },
+   {
+    "family": "Nguyen",
+    "given": "Thi Lan"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "container-title": "Journal of Imaginary Cardiology",
+  "DOI": "10.0000/scifi.example.002",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "lindqvist2022rules",
+  "type": "article-journal",
+  "title": "A rule-based system for extracting valve lesion severity from echocardiography reports",
+  "author": [
+   {
+    "family": "Lindqvist",
+    "given": "Erik"
+   },
+   {
+    "family": "Moreau",
+    "given": "Claire"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "container-title": "Fictional Informatics in Medicine",
+  "DOI": "10.0000/scifi.example.003",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "chen2024openweight",
+  "type": "article-journal",
+  "title": "Open-weight large language models for clinical information extraction: a methods overview",
+  "author": [
+   {
+    "family": "Chen",
+    "given": "Wei"
+   },
+   {
+    "family": "Alvarez",
+    "given": "Sofia"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "container-title": "Example Journal of Medical AI",
+  "DOI": "10.0000/scifi.example.004",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "mahmoudi2025echo",
+  "type": "article-journal",
+  "title": "A proprietary large language model for grading valvular heart disease in echocardiography reports: a single-centre evaluation",
+  "author": [
+   {
+    "family": "Mahmoudi",
+    "given": "Sara"
+   },
+   {
+    "family": "Keller",
+    "given": "Jonas"
+   },
+   {
+    "family": "Fischer",
+    "given": "Anna"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "container-title": "Journal of Invented Clinical Informatics",
+  "DOI": "10.0000/scifi.example.005",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "brunner2024privacy",
+  "type": "article-journal",
+  "title": "Data protection constraints on cloud-hosted language models in European hospitals",
+  "author": [
+   {
+    "family": "Brunner",
+    "given": "Martina"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "container-title": "Placeholder Health Policy Review",
+  "DOI": "10.0000/scifi.example.006",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "vandermeer2024external",
+  "type": "article-journal",
+  "title": "Loss of accuracy in clinical text models at external hospitals: a pooled analysis",
+  "author": [
+   {
+    "family": "van der Meer",
+    "given": "Daan"
+   },
+   {
+    "family": "Osei",
+    "given": "Kwame"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "container-title": "Illustrative Digital Health",
+  "DOI": "10.0000/scifi.example.007",
+  "note": "Invented reference for illustration. This paper does not exist."
+ },
+ {
+  "id": "tanaka2025grading",
+  "type": "article-journal",
+  "title": "Intermediate severity grades in valvular heart disease reporting: frequency and reader variability",
+  "author": [
+   {
+    "family": "Tanaka",
+    "given": "Yuki"
+   },
+   {
+    "family": "Berger",
+    "given": "Simon"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "container-title": "Journal of Imaginary Cardiology",
+  "DOI": "10.0000/scifi.example.008",
+  "note": "Invented reference for illustration. This paper does not exist."
+ }
+]

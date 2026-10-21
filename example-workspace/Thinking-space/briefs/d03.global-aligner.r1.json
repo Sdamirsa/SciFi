@@ -1,0 +1,42 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "task_id": "d03.global-aligner.r1",
+ "agent": "global-aligner",
+ "model": "sonnet",
+ "effort": "medium",
+ "objective": "Judge unit d03 against the spine, the skeleton and the results, including every number.",
+ "context": [
+  "Central claim: An open-weight LLM run inside the hospital network extracts valvular heart disease severity from echocardiography reports more accurately than rule-based extraction and keeps its accuracy at a second centre, with the remaining errors concentrated in reports that grade a lesion between two categories.",
+  "Unit d03 takeaway: Accuracy held at centre B, which suggests transfer between similar hospitals rather than across health systems. It closes thread T2 (transfer to a second centre).",
+  "Previous unit d02 takeaway: the accuracy gain over rule-based extraction is consistent with prior work. Next unit d04 takeaway: errors cluster in intermediate grades.",
+  "Journal: lancet. Mode: co-thinker.",
+  "Rule (checklist B4 and D9): every number identical to results.md, claim strength matched to the design, the unit closes the thread the skeleton assigns."
+ ],
+ "inputs": [
+  "Thinking-space/units/d03.logic.json",
+  "Thinking-space/skeleton.json",
+  "Thinking-space/spine.json",
+  "Manuscript/results.md"
+ ],
+ "unit_text": "The second question was whether accuracy would hold at a centre whose reports played no part in prompt development. Prompts were written and revised over three rounds on 200 reports from centre A, and reports from centre B were seen only at test time. At centre B the model reached an accuracy of 95.4% (95% CI 93.9 to 97.5), which lies within the interval of the overall estimate. Clinical text models often lose accuracy when moved between hospitals because templates, abbreviations and grading habits differ [@vandermeer2024external]. Our result confirms that an open-weight model prompted without fine-tuning generalises across Swiss university hospitals. Both centres write their reports in German and use the same reporting software.",
+ "constraints": [
+  "Read only the listed inputs",
+  "Return findings only. Do not edit files other than your envelope"
+ ],
+ "output_contract": {
+  "envelope": "Thinking-space/handshakes/d03.global-aligner.r1.json"
+ },
+ "done_criteria": [
+  "Envelope validates against envelope.schema.json",
+  "Every finding has a location and a rule"
+ ],
+ "non_goals": [
+  "Wording",
+  "Neighbours",
+  "Citations"
+ ],
+ "escalation": "If blocked, or a source is missing, return status blocked or a NEED in needs. Never guess.",
+ "dispatched_at": "2026-10-21T09:08:00+02:00",
+ "mode": "co-thinker",
+ "journal": "lancet"
+}

@@ -1,0 +1,231 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi unit logic map",
+ "type": "object",
+ "required": [
+  "unit_id",
+  "section",
+  "source",
+  "point",
+  "claims",
+  "steps"
+ ],
+ "properties": {
+  "unit_id": {
+   "type": "string"
+  },
+  "section": {
+   "type": "string",
+   "enum": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion",
+    "limitations",
+    "conclusion",
+    "caption",
+    "panel",
+    "other"
+   ]
+  },
+  "source": {
+   "type": "string",
+   "enum": [
+    "extracted",
+    "generated",
+    "mixed"
+   ],
+   "description": "extracted from existing text, generated from skeleton, or both"
+  },
+  "point": {
+   "type": "string",
+   "description": "the one point of the unit in a short phrase"
+  },
+  "takeaway": {
+   "type": "string",
+   "description": "the intended last-sentence takeaway"
+  },
+  "context_opener": {
+   "type": "string",
+   "description": "the intended first-sentence context"
+  },
+  "thread": {
+   "type": "string"
+  },
+  "skeleton_ref": {
+   "type": "string"
+  },
+  "claims": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "kind",
+     "evidence",
+     "strength"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "text": {
+      "type": "string",
+      "description": "the claim as one sentence, paraphrased"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "background",
+       "gap",
+       "aim",
+       "method",
+       "finding",
+       "interpretation",
+       "comparison",
+       "mechanism",
+       "implication",
+       "limitation",
+       "conclusion"
+      ]
+     },
+     "sentence": {
+      "type": "integer",
+      "description": "sentence index in the unit, 1-based; 0 when generated and not yet written"
+     },
+     "evidence": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "kind",
+        "ref"
+       ],
+       "properties": {
+        "kind": {
+         "type": "string",
+         "enum": [
+          "result",
+          "citation",
+          "logic",
+          "figure",
+          "table",
+          "none"
+         ]
+        },
+        "ref": {
+         "type": "string",
+         "description": "result id like R3, citekey like @smith2024, claim id like c2 for a logical step, figure id like F2b"
+        },
+        "status": {
+         "type": "string",
+         "enum": [
+          "supported",
+          "overstated",
+          "unsupported",
+          "unverified",
+          "need"
+         ]
+        },
+        "note": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "strength": {
+      "type": "string",
+      "enum": [
+       "certain",
+       "strong",
+       "moderate",
+       "hedged",
+       "speculative"
+      ]
+     },
+     "thread": {
+      "type": "string",
+      "description": "thread id from spine.json this claim serves"
+     },
+     "verbs": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  },
+  "steps": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "from",
+     "to",
+     "relation"
+    ],
+    "properties": {
+     "from": {
+      "type": "string"
+     },
+     "to": {
+      "type": "string"
+     },
+     "relation": {
+      "type": "string",
+      "enum": [
+       "supports",
+       "qualifies",
+       "contrasts",
+       "extends",
+       "restates",
+       "bridges",
+       "none"
+      ]
+     },
+     "note": {
+      "type": "string"
+     }
+    }
+   },
+   "description": "the ordered logical steps between claims; a 'none' relation marks a zig-zag"
+  },
+  "numbers": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "value",
+     "ref"
+    ],
+    "properties": {
+     "value": {
+      "type": "string"
+     },
+     "ref": {
+      "type": "string"
+     },
+     "matches_results": {
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "word_count": {
+   "type": "integer"
+  },
+  "sentence_count": {
+   "type": "integer"
+  },
+  "created_by": {
+   "type": "string"
+  },
+  "created_at": {
+   "type": "string"
+  }
+ }
+}

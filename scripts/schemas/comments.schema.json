@@ -1,0 +1,115 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "SciFi review comments",
+ "type": "object",
+ "required": [
+  "unit_id",
+  "comments",
+  "created_at"
+ ],
+ "properties": {
+  "unit_id": {
+   "type": "string"
+  },
+  "scope": {
+   "type": "string",
+   "enum": [
+    "unit",
+    "section",
+    "manuscript"
+   ]
+  },
+  "journal": {
+   "type": "string"
+  },
+  "comments": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "severity",
+     "issue",
+     "solution",
+     "location"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "axis": {
+      "type": "string",
+      "enum": [
+       "flow",
+       "local",
+       "global",
+       "evidence",
+       "style",
+       "logic",
+       "figure",
+       "gate",
+       "other"
+      ]
+     },
+     "severity": {
+      "type": "string",
+      "enum": [
+       "blocker",
+       "major",
+       "minor",
+       "nit"
+      ]
+     },
+     "issue": {
+      "type": "string"
+     },
+     "solution": {
+      "type": "string"
+     },
+     "location": {
+      "type": "string",
+      "description": "unit id plus sentence number or a short quote, e.g. p04:s3"
+     },
+     "quote": {
+      "type": "string",
+      "description": "at most 12 words of the offending text"
+     },
+     "rule": {
+      "type": "string",
+      "description": "standards reference, e.g. checklist C2 or results.md paragraph template"
+     },
+     "response": {
+      "type": "string",
+      "enum": [
+       "accept",
+       "reject",
+       "defer",
+       "pending"
+      ]
+     },
+     "response_note": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "summary": {
+   "type": "string"
+  },
+  "verdict": {
+   "type": "string",
+   "enum": [
+    "accept",
+    "minor",
+    "major",
+    "reject"
+   ]
+  },
+  "created_at": {
+   "type": "string"
+  },
+  "applied": {
+   "type": "boolean"
+  }
+ }
+}

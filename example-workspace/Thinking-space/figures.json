@@ -1,0 +1,119 @@
+{
+ "_note": "Invented for illustration. The study, data, people and sources in this file are fictional.",
+ "items": [
+  {
+   "id": "F1",
+   "kind": "figure",
+   "role": "overview",
+   "type": "schematic",
+   "shows": "From echocardiography report to registry field, with the LLM and the rule-based system in parallel and the two centres marked.",
+   "results": [],
+   "cited_from": "r01",
+   "status": "chosen",
+   "caption": "Figure 1: Study overview. Reports from centre A and centre B were processed by an open-weight large language model (LLM) run on hospital hardware and by a rule-based system, and each output was compared with consensus labels from two cardiologists."
+  },
+  {
+   "id": "F2",
+   "kind": "figure",
+   "role": "flow",
+   "type": "flow diagram",
+   "shows": "Report counts at each step from 1,200 reports to the 200 development and 1,000 test reports, by centre.",
+   "results": [
+    "R1"
+   ],
+   "cited_from": "r01",
+   "data_source": "Manuscript/figures/fig2_flow_counts.csv",
+   "status": "chosen",
+   "caption": "Figure 2: Flow of reports. Exclusions are shown at each step. Development reports came from centre A only, and test reports came from both centres."
+  },
+  {
+   "id": "F3",
+   "kind": "figure",
+   "role": "primary",
+   "type": "dot plot with 95% CI",
+   "shows": "Per-lesion accuracy of the LLM and the rule-based system, overall and by centre.",
+   "results": [
+    "R2",
+    "R4"
+   ],
+   "panels": [
+    {
+     "letter": "A",
+     "shows": "Accuracy per lesion, both systems, both centres combined",
+     "n": "1,000 reports",
+     "stat": "bootstrap 95% CI"
+    },
+    {
+     "letter": "B",
+     "shows": "LLM accuracy per lesion at centre A and centre B",
+     "n": "520 and 480 reports",
+     "stat": "bootstrap 95% CI"
+    }
+   ],
+   "cited_from": "r02",
+   "data_source": "Manuscript/figures/fig3_accuracy_by_lesion.csv",
+   "encoding": "One colour per system, the same in both panels, with a dashed reference line at the cardiologist agreement of 94.1%.",
+   "numbers_on_figure": "Overall accuracy with 95% CI printed beside each system.",
+   "alternatives_considered": [
+    "Grouped bar chart of accuracy (hides the CIs)",
+    "Confusion matrices per lesion (moved to the supplement)"
+   ],
+   "status": "chosen",
+   "caption": "Figure 3: Extraction accuracy by lesion, system and centre. (A) Accuracy of the large language model (LLM) and the rule-based system for each lesion, both centres combined. (B) LLM accuracy at centre A and centre B. Points are accuracy and bars are 95% CIs from 2,000 bootstrap resamples. The dashed line marks agreement between the two cardiologists before consensus."
+  },
+  {
+   "id": "T1",
+   "kind": "table",
+   "role": "characteristics",
+   "type": "characteristics table",
+   "shows": "Age, sex, setting, lesion severity, intermediate grades and report length by centre.",
+   "results": [],
+   "cited_from": "r01",
+   "status": "drafted",
+   "caption": "Table 1: Characteristics of the test set by centre"
+  },
+  {
+   "id": "T2",
+   "kind": "table",
+   "role": "secondary",
+   "type": "performance table",
+   "shows": "Accuracy with 95% CI for both systems overall and by centre, the difference, processing time and LLM errors by category.",
+   "results": [
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6"
+   ],
+   "cited_from": "r02",
+   "status": "chosen",
+   "caption": "Table 2: Accuracy, processing time and errors of the large language model and the rule-based system"
+  },
+  {
+   "id": "S1",
+   "kind": "supplementary-table",
+   "role": "error",
+   "type": "example table",
+   "shows": "One anonymised example sentence per error category with its count.",
+   "results": [
+    "R6"
+   ],
+   "cited_from": "r03",
+   "data_source": "Manuscript/figures/tableS1_error_examples.csv",
+   "status": "brainstormed",
+   "caption": "Supplementary Table 1: Examples of large language model errors by category"
+  }
+ ],
+ "rejected": [
+  {
+   "idea": "Radar chart of accuracy per lesion",
+   "why": "No scale for CIs, and the area exaggerates differences."
+  },
+  {
+   "idea": "Bar chart of processing time",
+   "why": "One number per system, which a table row shows better."
+  }
+ ],
+ "status": "agreed",
+ "updated_at": "2026-10-20T10:05:00+02:00"
+}
