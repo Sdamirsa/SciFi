@@ -16,6 +16,7 @@ Initial release.
 
 ## 0.1.1
 
+- `scifi-stats` skill: method selection from question, data type and design via a method map, a complexity guard against paper-specific methods, reporting rules and an analysis-plan template.
 - `scifi-export` skill and `scripts/export_docx.py`: Word export with Scannable Cite markers that Zotero's ODF/DOCX Scan turns into live citation fields, with the Google Docs handoff steps in the Zotero guide.
 
 ## Planned

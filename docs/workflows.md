@@ -100,3 +100,7 @@ writes the next action into `STATE.json`. A failed check stops it and says why. 
 ## Export to Word and Google Docs
 
 `/scifi-export --library users/<id>` writes `export/<name>.docx` with Scannable Cite markers for every `[@citekey]`, plus a report of unmapped keys. Then follow the seven steps in [zotero-guide.md](zotero-guide.md#export-to-word-and-google-docs-with-live-citations). Needs `Literature/library.bbt.json` (Better BibTeX JSON export).
+
+## Choose a statistical method
+
+`/scifi-stats <question>` classifies the question, the outcome and exposure types and the design, picks the standard method from `skills/scifi-stats/references/method-map.md`, applies the complexity guard (bespoke methods need a written justification and a human gate), and writes `Thinking-space/analysis-plan.md` plus the Methods statistical-analysis paragraph. It triggers only for analysis questions, not for writing about statistics.

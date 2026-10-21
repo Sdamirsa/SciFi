@@ -65,7 +65,7 @@ text(40, 68, "One repo, three ways to run it (Claude Code plugin, copied .claude
              "Three actors. Every handoff is a JSON file in the workspace, validated on write.", 12.5, fill=SLATE)
 
 # ------------------------------------------------------------------ left: repo
-LX, LY, LW, LH = 40, 92, 520, 1030
+LX, LY, LW, LH = 40, 92, 520, 1040
 box(LX, LY, LW, LH)
 text(LX + 16, LY + 26, "SciFi/  (the repo, github.com/Sdamirsa/SciFi)", 14.5, "bold")
 repo = [
@@ -80,6 +80,7 @@ repo = [
     ("  ", "scifi-literature/", "scout, notes, ontology, labels, evidence lookup"),
     ("  ", "scifi-review/", "evaluation, comments.json, improvements"),
     ("  ", "scifi-export/", "Word with live Zotero citations, then Google Docs"),
+    ("  ", "scifi-stats/", "which biostatistical method, with a complexity guard"),
     ("  ", "scifi-lite/", "single-session version for claude.ai"),
     ("  ", "project-memory/", "the ritual: STATUS, Project-log, LESSONS"),
     ("  ", "panel-discussion/", "decision utility"),
@@ -127,10 +128,11 @@ cmds = [("/scifi <workspace> [mode] [journal]", "full pipeline, or resume from S
         ("/scifi-figures", "brainstorm figures and tables"),
         ("/scifi-literature", "library, notes, ontology, labels"),
         ("/scifi-export --library users/<id>", "docx with live Zotero citations"),
+        ("/scifi-stats", "analysis plan: the standard method for the question"),
         ("/project-memory", "end-of-session ritual, user only")]
 for i, (c, d) in enumerate(cmds):
-    text(MX + 22, hy + 66 + i * 17, c, 10.8, mono=True)
-    text(MX + 290, hy + 66 + i * 17, d, 10.5, fill=SLATE)
+    text(MX + 22, hy + 62 + i * 16, c, 10.5, mono=True)
+    text(MX + 290, hy + 62 + i * 16, d, 10.2, fill=SLATE)
 text(MX + 14, hy + 196, "Decides at gates: picks one option, approves diffs, answers NEED requests.", 11, fill="#7a4b00")
 text(MX + 14, hy + 213, "Owns Manuscript/ and Literature/. The system reads them and never edits them.", 11, fill="#7a4b00")
 text(MX + 14, hy + 230, "Modes: co-thinker (default), human-on-the-loop, human-in-the-loop, fully-automated.", 11, fill="#7a4b00")
@@ -195,6 +197,7 @@ ws = [
     ("  ", "notes/  ontology.yaml  labels/", "written by scifi-literature only"),
     ("", "Thinking-space/", "SYSTEM owns, all validated JSON"),
     ("  ", "STATE.json", "stage, mode, journal, next action"),
+    ("  ", "analysis-plan.md", "question, data, method, what is reported"),
     ("  ", "spine.json", "claim, gap, results, implications, threads"),
     ("  ", "skeleton.json", "units per section, takeaway, thread"),
     ("  ", "figures.json", "display-item plan and captions"),

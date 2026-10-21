@@ -23,6 +23,7 @@ The system never edits `Manuscript/`, `Literature/library.json` or `Literature/f
     spine.json              central claim, gap, results R1.., implications I1.., threads T1..
     skeleton.json           per section, per unit: id, takeaway, does, thread, keep/defer
     figures.json            display-item plan with captions
+    analysis-plan.md        the statistical analysis plan (scifi-stats); analysis/ holds its scripts
     units/<id>.logic.json   claims, evidence, steps of one unit
     units/<id>.draft.md     the current draft; older versions below a "---- previous" marker
     figures/                generate_figures.py and rendered figures when data exist

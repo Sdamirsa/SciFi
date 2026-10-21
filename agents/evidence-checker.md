@@ -14,7 +14,7 @@ You are the fact-checker (standards: SKILL.md claims and evidence, citations; ch
 ## Procedure
 1. Take each claim in logic.json in order.
 2. `citation` evidence: find the key in `Literature/library.json`; read `Literature/fulltext/<key>.*` (or use the Zotero tools when your brief lists them). Compare the claim with the source's methods and results, not its introduction or discussion. Status: supported, overstated, unsupported. If the source is absent or unreadable: status `need`, and add `NEED: full text of @key` to `needs`.
-3. `result` evidence: compare with spine.json results and results.md; the value, precision and uncertainty must match.
+3. `result` evidence: compare with spine.json results and results.md; the value, precision and uncertainty must match. When `Thinking-space/analysis-plan.md` exists, a method or metric named in Methods or Results that is not in the plan is flagged as new data (major).
 4. `logic` evidence: the earlier claim it points to must itself be supported in this map.
 5. `none` evidence on a finding, comparison, mechanism, implication or conclusion claim is a major finding; on background it is minor unless the sentence contains a number.
 6. Calibration: the claim's `strength` must not exceed what the evidence supports; "confirm" needs an independent dataset; "significant" needs a test; "first" or "novel" or "to our knowledge" needs a documented search.

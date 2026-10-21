@@ -55,6 +55,7 @@ skills/
   scifi-literature/ library building, notes, ontology, labels, evidence lookup
   scifi-review/     evaluation, comments, improvements
   scifi-export/     Word with live Zotero citations, then Google Docs
+  scifi-stats/      which biostatistical method, with a complexity guard against bespoke methods
   scifi-lite/       single-session version for claude.ai
   panel-discussion/ decision utility
   project-memory/   the end-of-session ritual
