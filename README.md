@@ -52,15 +52,16 @@ skills/
   scifi-skeleton/   reverse outline from the threads
   scifi-paragraph/  the paragraph loop
   scifi-figures/    figure and table plan, captions
-  scifi-literature/ Zotero MCP or Better BibTeX export
+  scifi-literature/ library building, notes, ontology, labels, evidence lookup
   scifi-review/     evaluation, comments, improvements
+  scifi-export/     Word with live Zotero citations, then Google Docs
   scifi-lite/       single-session version for claude.ai
   panel-discussion/ decision utility
   project-memory/   the end-of-session ritual
   system-design-review/  maintainer rubric
 agents/             the sub-agents (checkers, drafter, gate, improver, design-reviewer)
 hooks/              session-start, validate-json, stop-pointer
-scripts/            validate_json, init_workspace, state, bbt_check, install_local; schemas/
+scripts/            validate_json, init_workspace, state, bbt_check, export_docx, install_local; schemas/
 example-workspace/  what a user folder looks like
 docs/               protocol, workflows, architecture, installation, claude-ai, zotero-guide
 dist/               the .skill packages for claude.ai

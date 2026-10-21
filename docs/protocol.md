@@ -31,6 +31,7 @@ The system never edits `Manuscript/`, `Literature/library.json` or `Literature/f
     comments/<id>.json      review comments in the same finding format
     log/decisions.jsonl     append-only
     scratch/                option exploration, stress tests
+  export/                   docx files from scifi-export and their reports
   .claude/                  memory spine (see project-memory)
     STATUS.md  Project-log.jsonl  LESSONS.jsonl
 ```

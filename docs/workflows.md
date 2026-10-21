@@ -96,3 +96,7 @@ Type `/project-memory`. It validates every JSON, runs the checker on accepted un
 session, curates lessons, rewrites `.claude/STATUS.md`, proposes at most three changes, and
 writes the next action into `STATE.json`. A failed check stops it and says why. Details in
 `skills/project-memory/SKILL.md`.
+
+## Export to Word and Google Docs
+
+`/scifi-export --library users/<id>` writes `export/<name>.docx` with Scannable Cite markers for every `[@citekey]`, plus a report of unmapped keys. Then follow the seven steps in [zotero-guide.md](zotero-guide.md#export-to-word-and-google-docs-with-live-citations). Needs `Literature/library.bbt.json` (Better BibTeX JSON export).

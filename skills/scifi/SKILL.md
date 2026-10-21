@@ -56,6 +56,7 @@ With no arguments, print the six stages, the four modes and the workspace layout
 | 4 paragraphs | `scifi-paragraph` | `units/*`, `briefs/*`, `handshakes/*` |
 | 5 review | `scifi-review` | `comments/*`, whole-manuscript verdict |
 | 6 ritual | `project-memory` (user-typed only) | `.claude/STATUS.md`, logs |
+| export | `scifi-export` (any time after units are accepted) | `export/*.docx` with live Zotero citation markers |
 
 A stage can be entered directly when the user asks for it; the prerequisites are checked
 first (no paragraph loop without an agreed spine and skeleton; no skeleton without a spine).
