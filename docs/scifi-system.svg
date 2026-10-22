@@ -89,23 +89,25 @@
 <text x="614" y="156" font-size="11.5" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Types a command or a phrase</text>
 <text x="622" y="172" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi &lt;workspace&gt; [mode] [journal]</text>
 <text x="890" y="172" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">full pipeline, or resume from STATE.json</text>
-<text x="622" y="188" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-paragraph d03</text>
-<text x="890" y="188" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">one paragraph through the loop</text>
-<text x="622" y="204" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-review [file]</text>
-<text x="890" y="204" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">evaluate, comment, optionally improve</text>
-<text x="622" y="220" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-figures</text>
-<text x="890" y="220" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">brainstorm figures and tables</text>
-<text x="622" y="236" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-literature</text>
-<text x="890" y="236" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">library, notes, ontology, labels</text>
-<text x="622" y="252" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-export --library users/&lt;id&gt;</text>
-<text x="890" y="252" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">docx with live Zotero citations</text>
-<text x="622" y="268" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-stats</text>
-<text x="890" y="268" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">analysis plan: the standard method for the question</text>
-<text x="622" y="284" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/project-memory</text>
-<text x="890" y="284" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">end-of-session ritual, user only</text>
-<text x="614" y="306" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Decides at gates: picks one option, approves diffs, answers NEED requests.</text>
-<text x="614" y="323" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Owns Manuscript/ and Literature/. The system reads them and never edits them.</text>
-<text x="614" y="340" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Modes: co-thinker (default), human-on-the-loop, human-in-the-loop, fully-automated.</text>
+<text x="622" y="187" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-paragraph d03</text>
+<text x="890" y="187" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">one paragraph through the loop</text>
+<text x="622" y="202" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-review [file]</text>
+<text x="890" y="202" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">evaluate, comment, optionally improve</text>
+<text x="622" y="217" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-figures</text>
+<text x="890" y="217" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">brainstorm figures and tables</text>
+<text x="622" y="232" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-literature</text>
+<text x="890" y="232" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">library, notes, ontology, labels</text>
+<text x="622" y="247" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-export --library users/&lt;id&gt;</text>
+<text x="890" y="247" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">docx with live Zotero citations</text>
+<text x="622" y="262" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi-stats</text>
+<text x="890" y="262" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">analysis plan: the standard method for the question</text>
+<text x="622" y="277" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/project-memory</text>
+<text x="890" y="277" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">end-of-session ritual, user only</text>
+<text x="622" y="292" font-size="10.5" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">/scifi:review-all  /scifi:literature-all</text>
+<text x="890" y="292" font-size="10.2" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">batch workflows; the skills launch them, or type them</text>
+<text x="614" y="308" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Decides at gates: picks one option, approves diffs, answers NEED requests.</text>
+<text x="614" y="325" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Owns Manuscript/ and Literature/. The system reads them and never edits them.</text>
+<text x="614" y="342" font-size="11" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Modes: co-thinker (default), human-on-the-loop, human-in-the-loop, fully-automated.</text>
 <circle cx="626" cy="426" r="9" fill="#1f5fbf"/>
 <text x="626" y="430" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">0</text>
 <text x="644" y="430" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">resume</text>
@@ -139,27 +141,29 @@
 <text x="614" y="734" font-size="11.5" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">The paragraph loop for one unit</text>
 <text x="622" y="755" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">logic-mapper</text>
 <text x="770" y="755" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">claims, evidence, steps of the text  units/&lt;id&gt;.logic.json</text>
-<text x="622" y="773" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">flow-checker</text>
-<text x="770" y="773" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">internal: one point, context first, takeaway last, old to new</text>
-<text x="622" y="791" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">local-aligner</text>
-<text x="770" y="791" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">neighbours: redundancy, pre-emption, bridge, single home</text>
-<text x="622" y="809" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">global-aligner</text>
-<text x="770" y="809" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">spine and results: serves the claim, same gap, no new data</text>
-<text x="622" y="827" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">evidence-checker</text>
-<text x="770" y="827" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">each claim vs cited source, our results, or a logical step</text>
-<text x="622" y="845" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">style-checker</text>
-<text x="770" y="845" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">runs check_manuscript.py, then the section standards</text>
-<text x="622" y="863" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">drafter</text>
-<text x="770" y="863" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">redrafts from logic.json and the accepted findings  units/&lt;id&gt;.draft.md</text>
-<text x="622" y="881" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">standards-gate</text>
-<text x="770" y="881" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">one pass: PASS, or RETURN with three blockers</text>
-<rect x="622" y="901" width="105" height="15" rx="7" fill="#5a8f6a"/>
-<text x="674.5" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet medium</text>
-<rect x="735" y="901" width="84" height="15" rx="7" fill="#7a9d85"/>
-<text x="777.0" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet low</text>
-<rect x="827" y="901" width="63" height="15" rx="7" fill="#2a8a56"/>
-<text x="858.5" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">inherit</text>
-<text x="902" y="912" font-size="10.3" font-weight="normal" fill="#1d6b3a" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">five checks in parallel; the two inherit agents after</text>
+<text x="622" y="772" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">flow-checker</text>
+<text x="770" y="772" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">internal: one point, context first, takeaway last, old to new</text>
+<text x="622" y="789" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">local-aligner</text>
+<text x="770" y="789" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">neighbours: redundancy, pre-emption, bridge, single home</text>
+<text x="622" y="806" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">global-aligner</text>
+<text x="770" y="806" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">spine and results: serves the claim, same gap, no new data</text>
+<text x="622" y="823" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">evidence-checker</text>
+<text x="770" y="823" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">each claim vs cited source, our results, or a logical step</text>
+<text x="622" y="840" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">style-checker</text>
+<text x="770" y="840" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">runs check_manuscript.py, then the section standards</text>
+<text x="622" y="857" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">drafter</text>
+<text x="770" y="857" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">redrafts from logic.json and the accepted findings  units/&lt;id&gt;.draft.md</text>
+<text x="622" y="874" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">standards-gate</text>
+<text x="770" y="874" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">one pass: PASS, or RETURN with three blockers</text>
+<text x="622" y="891" font-size="11" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">workflows</text>
+<text x="770" y="891" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">review-all: the checks on every unit; literature-all: a noter or labeler per paper</text>
+<rect x="622" y="909" width="105" height="15" rx="7" fill="#5a8f6a"/>
+<text x="674.5" y="920" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet medium</text>
+<rect x="735" y="909" width="84" height="15" rx="7" fill="#7a9d85"/>
+<text x="777.0" y="920" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet low</text>
+<rect x="827" y="909" width="63" height="15" rx="7" fill="#2a8a56"/>
+<text x="858.5" y="920" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">inherit</text>
+<text x="902" y="920" font-size="10.3" font-weight="normal" fill="#1d6b3a" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">five checks in parallel; the two inherit agents after</text>
 <path d="M940.0,355 L940.0,380" stroke="#b8732a" stroke-width="1.6" fill="none" marker-end="url(#arr-b8732a)"/>
 <text x="948.0" y="371" font-size="10" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">command, mode, journal</text>
 <path d="M670,380 L670,355" stroke="#1f5fbf" stroke-width="1.6" fill="none" marker-end="url(#arr-1f5fbf)" stroke-dasharray="4 3"/>

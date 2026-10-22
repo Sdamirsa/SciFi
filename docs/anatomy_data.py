@@ -93,6 +93,7 @@ LOCAL = {
                 (S(("/scifi-export --library users/<id>", "skills/scifi-export/SKILL.md")), S("docx with live Zotero citations")),
                 (S(("/scifi-stats", "skills/scifi-stats/SKILL.md")), S("analysis plan: the standard method for the question")),
                 (S(("/project-memory", "skills/project-memory/SKILL.md")), S("end-of-session ritual, user only")),
+                (S(("/scifi:review-all", "workflows/review-all.js"), "  ", ("/scifi:literature-all", "workflows/literature-all.js")), S("batch workflows; the skills launch them, or type them")),
             ],
             "notes": [
                 S(("Decides at gates: picks one option, approves diffs, answers NEED requests.", "docs/protocol.md#6-control-modes")),
@@ -128,6 +129,7 @@ LOCAL = {
                 (S(("style-checker", "agents/style-checker.md")), S("runs ", ("check_manuscript.py", "skills/scientific-writing/scripts/check_manuscript.py"), ", then the ", ("section standards", "skills/scientific-writing/references/sections"))),
                 (S(("drafter", "agents/drafter.md")), S("redrafts from logic.json and the accepted findings  ", ("units/<id>.draft.md", "example-workspace/Thinking-space/units/d03.draft.md"))),
                 (S(("standards-gate", "agents/standards-gate.md")), S("one pass: PASS, or RETURN with three blockers")),
+                (S(("workflows", "workflows")), S(("review-all", "workflows/review-all.js"), ": the checks on every unit; ", ("literature-all", "workflows/literature-all.js"), ": a ", ("noter", "agents/noter.md"), " or ", ("labeler", "agents/labeler.md"), " per paper")),
             ],
             "pills": [("sonnet medium", "#5a8f6a"), ("sonnet low", "#7a9d85"), ("inherit", "#2a8a56")],
             "pills_href": "docs/protocol.md#7-model-routing-and-effort",

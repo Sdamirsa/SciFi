@@ -92,10 +92,10 @@ hy = 110
 text(MX + 14, hy + 46, L["human"]["heading"], 11.5, "bold")
 cmds = [(plain(c), plain(d)) for c, d in LOCAL["lanes"]["human"]["items"]]
 for i, (c, d) in enumerate(cmds):
-    text(MX + 22, hy + 62 + i * 16, c, 10.5, mono=True)
-    text(MX + 290, hy + 62 + i * 16, d, 10.2, fill=SLATE)
+    text(MX + 22, hy + 62 + i * 15, c, 10.5, mono=True)
+    text(MX + 290, hy + 62 + i * 15, d, 10.2, fill=SLATE)
 for i, n in enumerate(LOCAL["lanes"]["human"]["notes"]):
-    text(MX + 14, hy + 196 + i * 17, plain(n), 11, fill="#7a4b00")
+    text(MX + 14, hy + 198 + i * 17, plain(n), 11, fill="#7a4b00")
 
 my = 380
 steps = [(n, plain(name), plain(d)) for n, name, d in LOCAL["lanes"]["master"]["steps"]]
@@ -112,13 +112,13 @@ sy = 690
 text(MX + 14, sy + 44, L["agents"]["heading"], 11.5, "bold")
 rows = [(plain(a), plain(d)) for a, d in L["agents"]["rows"]]
 for i, (a, d) in enumerate(rows):
-    yy = sy + 65 + i * 18
+    yy = sy + 65 + i * 17
     text(MX + 22, yy, a, 11, "bold", mono=True)
     text(MX + 170, yy, d, 10.5, fill="#333")
 px = MX + 22
 for label, color in L["agents"]["pills"]:
-    px += pill(px, sy + 222, label, color) + 8
-text(MX + 302, sy + 222, plain(L["agents"]["note"]), 10.3, fill="#1d6b3a")
+    px += pill(px, sy + 230, label, color) + 8
+text(MX + 302, sy + 230, plain(L["agents"]["note"]), 10.3, fill="#1d6b3a")
 
 # arrows between lanes
 line(MX + MW / 2 + 60, 355, MX + MW / 2 + 60, 380, HUMAN)
