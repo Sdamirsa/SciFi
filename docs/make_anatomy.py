@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Write docs/index.html, the clickable anatomy of SciFi (served by GitHub Pages).
 
-Usage: python3 docs/make_anatomy.py            (writes docs/index.html)
+Usage: python3 docs/make_anatomy.py            (writes docs/index.html, a complete document)
 Check: python3 docs/make_anatomy.py --check    (also verifies every link target exists in the repo)
+       python3 docs/make_anatomy.py --body FILE (also writes the page without the document
+                                                 skeleton, for hosts that add their own)
 
 Same layout and content as docs/scifi-system.svg (both read docs/anatomy_data.py), with a toggle
 between the Claude Code view and the claude.ai view. Every name opens its file or folder on
@@ -162,7 +164,16 @@ def view_html(v):
 </section>'''
 
 
-def page():
+def page(body_only=False):
+    inner = page_inner()
+    if body_only:
+        return inner
+    return ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
+            + inner.replace("</style>", "</style>\n</head>\n<body>", 1) + "</body>\n</html>\n")
+
+
+def page_inner():
     tabs = "".join(
         f'<button type="button" role="tab" id="tab-{v["key"]}" data-view="{v["key"]}" aria-selected="{"true" if i == 0 else "false"}" '
         f'aria-controls="view-{v["key"]}">{html.escape(v["label"])}</button>' for i, v in enumerate(VIEWS))
@@ -322,6 +333,10 @@ def main(argv=None):
         print(f"all {len(all_hrefs())} link targets exist")
     OUT.write_text(page(), encoding="utf8")
     print(f"wrote {OUT} ({OUT.stat().st_size // 1024} KB)")
+    if "--body" in argv:
+        target = Path(argv[argv.index("--body") + 1])
+        target.write_text(page(body_only=True), encoding="utf8")
+        print(f"wrote {target}")
     return 0
 
 
