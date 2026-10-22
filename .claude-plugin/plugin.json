@@ -1,6 +1,6 @@
 {
   "name": "scifi",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Write, revise and evaluate scientific manuscripts: spine, skeleton, figure plan, a paragraph loop with five parallel checks and one standards gate, and review. JSON handshakes, a resume hook and a memory spine.",
   "author": {
     "name": "Seyed Amir Ahmad Safavi-Naini",

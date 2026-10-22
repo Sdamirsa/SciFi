@@ -38,8 +38,9 @@ The flag applies to that session only. Pass it each time, or use route A.
 bash /path/to/SciFi/scripts/install_local.sh /path/to/your-project
 ```
 
-The script copies `skills/`, `agents/`, `hooks/` and `scripts/` into
-`your-project/.claude/` and adds the hook wiring to `.claude/settings.json`. Paths that the
+The script copies `skills/`, `agents/`, `hooks/`, `scripts/` and `workflows/` into
+`your-project/.claude/` and adds the hook wiring to `.claude/settings.json` (the workflow
+commands become `/review-all` and `/literature-all`). Paths that the
 plugin resolves through `${CLAUDE_PLUGIN_ROOT}` resolve relative to `.claude/` instead; every
 skill names both forms. Run the script again to update; it overwrites SciFi files and leaves
 yours alone.
@@ -67,6 +68,18 @@ workspace. If it does not:
 
 In claude.ai, ask "check this paragraph with SciFi" and paste a paragraph. The reply should
 name the five checks and return findings with a location and a rule.
+
+## Optional: workflows
+
+The batch commands (`/scifi:review-all`, `/scifi:literature-all`) are dynamic workflows. They
+need workflows enabled in Claude Code (on by default on paid plans; on Pro, the Dynamic
+workflows row in `/config`). Claude Code asks once before the first launch. In a headless
+run (`claude -p` or the Agent SDK) add `Workflow(scifi:review-all)` and
+`Workflow(scifi:literature-all)` to the allow rules, or `Workflow` for both. In a copied
+`.claude/` install (route C) `workflows/` is copied too, the commands are `/review-all` and
+`/literature-all`, and the allow rules are `Workflow(review-all)` and
+`Workflow(literature-all)`. Without workflows, the same stages run unit by unit through the
+Agent tool; nothing else changes.
 
 ## Optional: literature access
 

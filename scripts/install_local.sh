@@ -5,9 +5,10 @@
 #   scripts/install_local.sh <project-dir>
 #
 # What it does:
-#   1. copies skills/, agents/, hooks/, scripts/ (and docs/protocol.md) from this repo into
-#      <project-dir>/.claude/ (existing files with the same name are replaced; your other
-#      .claude files are untouched; __pycache__ is skipped).
+#   1. copies skills/, agents/, hooks/, scripts/, workflows/ (and docs/protocol.md) from this
+#      repo into <project-dir>/.claude/ (existing files with the same name are replaced; your
+#      other .claude files are untouched; __pycache__ is skipped). In workflows/*.js the
+#      agent prefix 'scifi:' becomes '' because agents are not namespaced in a copied install.
 #   2. merges the hook wiring from hooks/hooks.json into <project-dir>/.claude/settings.json,
 #      idempotently (running it twice adds nothing). Your own hooks and settings are kept.
 #
@@ -34,7 +35,7 @@ PROJECT="$(cd "$PROJECT" && pwd)"
 DEST="$PROJECT/.claude"
 mkdir -p "$DEST"
 
-for d in skills agents hooks scripts; do
+for d in skills agents hooks scripts workflows; do
   if [ ! -d "$REPO/$d" ]; then
     echo "install_local: $REPO/$d missing" >&2
     exit 1
@@ -44,6 +45,11 @@ for d in skills agents hooks scripts; do
   cp -R "$REPO/$d/." "$DEST/$d/"
   # scifi-lite is the claude.ai variant; the full scifi skill replaces it here
   [ "$d" = skills ] && rm -rf "$DEST/skills/scifi-lite"
+  if [ "$d" = workflows ]; then
+    for f in "$DEST"/workflows/*.js; do
+      [ -f "$f" ] && sed -i.bak "s/^const AGENT_PREFIX = 'scifi:'/const AGENT_PREFIX = ''/" "$f" && rm -f "$f.bak"
+    done
+  fi
   find "$DEST/$d" -name '__pycache__' -type d -prune -exec rm -rf {} + 2>/dev/null || true
 done
 if [ -f "$REPO/docs/protocol.md" ]; then
@@ -107,7 +113,7 @@ PY
 
 cat <<EOF
 SciFi installed into $DEST
-  skills/ agents/ hooks/ scripts/ docs/protocol.md copied
+  skills/ agents/ hooks/ scripts/ workflows/ docs/protocol.md copied (workflows run as /review-all, /literature-all)
   hooks wired in $DEST/settings.json with \${CLAUDE_PLUGIN_ROOT} replaced by "\$CLAUDE_PROJECT_DIR"/.claude
 Where a skill says \${CLAUDE_PLUGIN_ROOT}/..., read .claude/... in this project.
 Next: python3 .claude/scripts/init_workspace.py <paper-folder>, then open Claude Code and type /scifi.

@@ -16,8 +16,14 @@ common sessions.
 | `/scifi-review [path] [journal] [--improve]` | "review my paper", "evaluate this manuscript", "act as reviewer 2" | evaluation, comments, optional diffs |
 | `/project-memory` | (user-typed only; phrases get a request to type it) | the end-of-session ritual |
 | `/panel-discussion` | "let's debate this", "what would experts think" | a decision utility for hard calls |
+| `/scifi:review-all` | "use a workflow to review the whole paper" | the five checks on every unit in parallel, envelopes stored, manuscript verdict (`scifi-review` normally launches it) |
+| `/scifi:literature-all` | "note all my papers with a workflow", "label the rest" | one noter or labeler per paper in parallel (`scifi-literature` launches it after the checkpoint) |
 
-`/scifi` with no arguments prints the stages and asks for a workspace.
+`/scifi` with no arguments prints the stages and asks for a workspace. The two workflow
+commands are dynamic workflows (Claude Code's `workflows/` scripts): they run in the
+background with no question inside, so the skills call them for the parts of a stage that are
+pure fan-out and keep the gates in the conversation. In a copied `.claude/` install they are
+`/review-all` and `/literature-all`. Protocol section 12 has the rules they keep.
 
 ## The six stages
 

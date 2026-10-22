@@ -25,7 +25,10 @@ drafted unless `--improve` is given, and the output is `comments/<id>.json` (sch
 2. **Script pass.** `python3 ${CLAUDE_PLUGIN_ROOT}/skills/scientific-writing/scripts/check_manuscript.py <file> --journal <journal>` on the
    whole manuscript. Its flags become `style` comments.
 3. **Per unit**, the five checks (logic-mapper first, then flow, local, global, evidence,
-   style in parallel). No drafter, no gate. Write `comments/<id>.json`.
+   style in parallel). No drafter, no gate. For more than about six units, or when the user
+   says "use a workflow", run steps 3 and 4 as one batch with the `review-all` workflow
+   (below) instead of dispatching unit by unit; then synthesise each unit from its envelopes
+   in `handshakes/` exactly as for a dispatched unit. Write `comments/<id>.json`.
 4. **Manuscript altitude.** `global-aligner` with scope `manuscript` (thread audit, number
    identity across abstract, results, discussion and captions, figures cited in order) and
    `standards-gate` with scope `manuscript` for the `manuscript_verdict` (accept, minor, major, reject)
@@ -33,6 +36,24 @@ drafted unless `--improve` is given, and the output is `comments/<id>.json` (sch
 5. **Report.** `comments/manuscript.json` with the verdict, the summary, and the comments
    ordered by severity, each with location and fix. In the conversation: the verdict, the
    three problems that matter most, and where the full list is.
+
+## The `review-all` workflow (steps 3 and 4 as one batch)
+
+`workflows/review-all.js` runs logic-mapper and the five checks on every unit in parallel,
+stores every brief and envelope in `briefs/` and `handshakes/` through a scribe agent, runs
+the two manuscript-altitude agents, and returns per-unit counts, blockers and NEEDs. Nothing
+inside it asks the human, so it fits every mode. Call the Workflow tool with name
+`scifi:review-all` (plugin) or `review-all` (copied `.claude/`) and these args, all paths
+absolute: `workspace`, `plugin_root`, `journal`, `mode`, `dispatched_at` (the ISO timestamp,
+since scripts cannot read the clock), `round`, `central_claim`, `manuscript_files`,
+`has_analysis_plan`, and `units`, one entry per skeleton unit with `id`, `section`, `text`,
+`takeaway`, `thread`, `prev_takeaway`, `next_takeaway`, `prev_text`, `next_text` and
+`word_target`. Read the returned summary, then do step 3's synthesis from the stored
+envelopes. A unit in `units_failed` or with `missing_envelopes` is re-dispatched once with
+the Agent tool; a unit whose `logic_status` is `blocked` carries a NEED for the human, not a
+re-dispatch. A second run after the human has changed text passes `round` n+1 so the earlier
+briefs, envelopes and scratch text survive. The header of the script lists the args; protocol section 12 states
+what a workflow may and may not do.
 
 ## Procedure with `--improve`
 

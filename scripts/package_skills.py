@@ -7,15 +7,17 @@ Usage:
 Builds:
     dist/scientific-writing.skill   zip, folder scientific-writing/ at the top level (claude.ai upload)
     dist/scifi-lite.skill           zip, folder scifi-lite/ at the top level (claude.ai upload)
-    dist/SciFi-dotclaude.zip        .claude/{skills,agents,hooks,scripts,docs/protocol.md} for a
+    dist/SciFi-dotclaude.zip        .claude/{skills,agents,hooks,scripts,workflows,docs/protocol.md} for a
                                     manual copy into a project (then wire hooks with install_local.sh
-                                    or by hand: ${CLAUDE_PLUGIN_ROOT} becomes "$CLAUDE_PROJECT_DIR"/.claude)
+                                    or by hand: ${CLAUDE_PLUGIN_ROOT} becomes "$CLAUDE_PROJECT_DIR"/.claude;
+                                    workflows/*.js get AGENT_PREFIX '' since agents are not namespaced there)
 
 __pycache__ folders and *.pyc files are skipped. Prints each file's size. Exits 1 when a
 source folder is missing (the other files are still built).
 """
 import argparse
 import os
+import re
 import sys
 import zipfile
 from pathlib import Path
@@ -95,6 +97,15 @@ def main(argv=None):
                 n += add_tree(zf, src, f".claude/{d}", skip={"scifi-lite"})
             else:
                 missing.append(d + "/")
+        wf = REPO / "workflows"
+        if wf.is_dir():
+            for f in sorted(wf.glob("*.js")):
+                # same anchored rewrite as install_local.sh (sed "s/^const AGENT_PREFIX = 'scifi:'/.../")
+                text = re.sub(r"^const AGENT_PREFIX = 'scifi:'", "const AGENT_PREFIX = ''", f.read_text(encoding="utf8"), count=1, flags=re.M)
+                zf.writestr(f".claude/workflows/{f.name}", text)
+                n += 1
+        else:
+            missing.append("workflows/")
         proto = REPO / "docs" / "protocol.md"
         if proto.is_file():
             zf.write(proto, ".claude/docs/protocol.md")

@@ -50,16 +50,24 @@ and only after the human starts this skill. Filenames use the citekey from `libr
 | Stage | Actor | Model, effort | Writes |
 |---|---|---|---|
 | 0 scout | master with the human | session | a search plan in `Thinking-space/scratch/search-plan.md` |
-| 1 notes | one subagent per paper, dispatched by the master | sonnet, medium | `notes/<key>.md` and its envelope |
+| 1 notes | `noter`, one per paper, dispatched by the master or by the `literature-all` workflow | sonnet, medium | `notes/<key>.md` and its envelope |
 | 2 ontology | master | session | `ontology.yaml` after the human gate |
-| 3 labels | one subagent per paper, dispatched by the master | sonnet, medium | `labels/<key>.json` and its envelope |
+| 3 labels | `labeler`, one per paper, dispatched by the master or by the `literature-all` workflow | sonnet, medium | `labels/<key>.json` and its envelope |
 | 3 aggregate | master (a short python3 stdlib script) | session | `labels/all_papers.json` |
 | lookup | `literature-scout`, `evidence-checker` | sonnet, low and medium | envelopes only |
 
 Batch dispatch uses the standard eight-field brief from the protocol, one paper per dispatch,
 task id `lit-<nnn>.notes.r1` or `lit-<nnn>.labels.r1` with the citekey in `context`. Each
 subagent writes only its own note or label file and its envelope, so parallel dispatches never
-share a file. Run batches of up to ten in parallel. A missing or unreadable full text is
+share a file. For the first two or three papers dispatch with the Agent tool, so the
+checkpoint can happen; for the rest call the Workflow tool with name `scifi:literature-all`
+(plugin) or `literature-all` (copied `.claude/`) and args `stage` (`notes` or `labels`),
+`workspace`, `plugin_root`, `dispatched_at` (ISO timestamp), `papers` (one entry per paper
+with `citekey`, `fulltext` path or null, optional `zotero_item_key`, and `number`, the
+`lit-<nnn>` index continuing from the checkpoint batch), `has_spine`, `zotero_tools`, and
+`template_notes` (the constraint lines agreed at the checkpoint). It writes every brief and
+envelope where a dispatch would and returns the written, blocked and failed keys; re-dispatch
+a failed key once with the Agent tool. A missing or unreadable full text is
 `status: blocked` with `NEED: full text of @key`, never a note written from the abstract.
 
 ## Stage 0: scout

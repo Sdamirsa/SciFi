@@ -12,6 +12,8 @@ Task ids follow `<unit>.<agent>.r<round>`. Every brief is written to `briefs/<ta
 
 ## Agent briefs
 
+These are the briefs for a dispatched unit. `briefsFor()` in `workflows/review-all.js` (template in `scripts/workflow_templates/`) builds the review-mode form of the same six briefs for a batch run and must keep these inputs and rule sets; change both together.
+
 **logic-mapper** (sonnet, medium)
 Objective: write `units/<id>.logic.json`.
 Inputs: the unit text (inline), `skeleton.json` entry, `spine.json`.

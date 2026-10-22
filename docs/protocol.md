@@ -80,7 +80,9 @@ A decision that cannot be undone (overwriting a human-edited draft, changing the
 | Agent | Model | Effort | Why |
 |---|---|---|---|
 | logic-mapper, flow-checker, local-aligner, global-aligner, evidence-checker, figure-brainstormer | sonnet | medium | independent, parallel, structured output; judgement is bounded by one axis |
+| noter, labeler | sonnet | medium | one paper each; grounded extraction against a template or an ontology |
 | style-checker, literature-scout | sonnet | low | script-backed or lookup work |
+| scribe | sonnet | low | workflow stage only; writes briefs and envelopes verbatim and runs the validator |
 | drafter, standards-gate, improver | inherit | inherit | prose quality and the final judgement stay with the model you chose for the session |
 | master | your session | your session | holds the decisions and the human conversation |
 
@@ -102,3 +104,22 @@ Read `Thinking-space/STATE.json`, then the last five lines of `log/decisions.jso
 ## 11. Honesty
 
 Failures come with their output. Skipped steps are named. "Done" means the gate passed and the envelope says so. A missing envelope is never counted as a pass; the master re-dispatches once and then asks the human. A mistake is logged in `Project-log.jsonl` (type `mistake`) and, when it could recur, as a `LESSONS.jsonl` row with a prevention that a script or a hook can check.
+
+## 12. Workflows (batch runs)
+
+A dynamic workflow (`workflows/*.js`) is a script that dispatches many agents without the
+master in the loop. SciFi uses it only where no human decision sits inside the batch:
+`review-all` (logic map and five checks on every unit, then the manuscript pass) and
+`literature-all` (one noter or labeler per paper). The script acts for the master and keeps
+the master's contract: every brief is written to `briefs/<task>.json` before its agent runs,
+every envelope is validated by the runtime against `envelope.schema.json` and stored at
+`handshakes/<task>.json` by the `scribe` agent (Write and the validator only), whose answer
+the script checks against the paths it was given, task ids and
+model routing are the same as for a dispatch, and the typed agents are the agent files in
+`agents/`. The script returns counts, blockers and NEEDs, never the envelopes themselves; the
+master synthesises from the stored files as for any dispatch. Nothing in a workflow drafts,
+decides or edits `Manuscript/` or `Literature/` beyond the one note or label file each noter
+or labeler owns. A workflow cannot read the clock, so the master passes `dispatched_at`. In a
+headless run (`claude -p`, the Agent SDK) the launch needs a `Workflow(<name>)` allow rule.
+The scripts are built from `scripts/workflow_templates/` by `scripts/build_workflows.py`,
+which inlines the envelope schema; edit the template, never the built file.

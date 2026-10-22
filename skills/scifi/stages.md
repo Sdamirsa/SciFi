@@ -36,7 +36,7 @@ For each unit in skeleton order, or the unit the user names. The procedure is in
 
 ## Stage 5: review (`scifi-review`)
 
-Two uses. (a) After all units are accepted: assemble each section, run `check_manuscript.py` on the whole, dispatch `standards-gate` at section altitude (scope: section) and once at manuscript altitude, and dispatch `global-aligner` on the assembled manuscript for the thread audit (every thread opened, carried, closed; numbers identical across abstract, results, discussion, captions). (b) On an external or finished manuscript: run stages 1 and 2 in extract mode, then the five checks per unit without drafting, and write `comments/<id>.json` and `comments/manuscript.json` with a verdict. The improver then applies accepted comments as diffs into `units/<id>.draft.md`.
+Two uses. (a) After all units are accepted: assemble each section, run `check_manuscript.py` on the whole, dispatch `standards-gate` at section altitude (scope: section) and once at manuscript altitude, and dispatch `global-aligner` on the assembled manuscript for the thread audit (every thread opened, carried, closed; numbers identical across abstract, results, discussion, captions). (b) On an external or finished manuscript: run stages 1 and 2 in extract mode, then the five checks per unit without drafting (for more than about six units, the `review-all` workflow runs them as one batch and stores the envelopes; `scifi-review` has the args), and write `comments/<id>.json` and `comments/manuscript.json` with a verdict. The improver then applies accepted comments as diffs into `units/<id>.draft.md`.
 
 ## Stage 6: ritual (`project-memory`)
 

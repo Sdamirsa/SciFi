@@ -77,7 +77,7 @@ for ind, name, desc in repo:
     text(LX + 16, y, ind + name, 12, "bold" if not ind else "normal", mono=True)
     if desc:
         text(LX + (200 if ind else 160), y, desc, 11, fill=SLATE)
-    y += 27
+    y += 25.5
 
 # ------------------------------------------------------------------ middle: lanes
 MX, MW = 600, 560
@@ -118,7 +118,7 @@ for i, (a, d) in enumerate(rows):
 px = MX + 22
 for label, color in L["agents"]["pills"]:
     px += pill(px, sy + 222, label, color) + 8
-text(MX + 290, sy + 222, plain(L["agents"]["note"]), 10.3, fill="#1d6b3a")
+text(MX + 302, sy + 222, plain(L["agents"]["note"]), 10.3, fill="#1d6b3a")
 
 # arrows between lanes
 line(MX + MW / 2 + 60, 355, MX + MW / 2 + 60, 380, HUMAN)
@@ -147,16 +147,13 @@ rules = [plain(r) for r in LOCAL["rules"]]
 for i, s in enumerate(rules):
     text(RX + 28, RY + 802 + i * 17, s, 10.3, fill="#333")
 
-# lane to column arrows
-curve(LX + LW, 320, MX, 230, SLATE, "3 3")
-curve(LX + LW, 580, MX, 500, SLATE, "3 3")
-curve(LX + LW, 860, MX, 810, SLATE, "3 3")
-curve(MX + MW, 200, RX, 150, HUMAN)
-text(MX + MW - 8, 194, plain(LOCAL["arrows"]["human_to_ws"]), 9.5, fill="#7a4b00", anchor="end")
-curve(MX + MW, 500, RX, 400, MASTER)
-text(MX + MW - 8, 494, plain(LOCAL["arrows"]["master_to_ws"]), 9.5, fill="#1b4b9c", anchor="end")
-curve(MX + MW, 810, RX, 560, AGENT)
-text(MX + MW - 8, 804, plain(LOCAL["arrows"]["agents_to_ws"]), 9.5, fill="#1d6b3a", anchor="end")
+# repo column foot: how the column reaches the lanes (same line as the page's column foot)
+line(LX + 16, LY + LH - 30, LX + LW - 16, LY + LH - 30, RULE, marker=False, dash="3 3", sw=1)
+text(LX + 16, LY + LH - 12, "\u2192 " + plain(LOCAL["arrows"]["repo_to_lanes"]), 10.5, fill=SLATE)
+# each lane to the workspace: label inside the lane header, short straight arrow across the gap
+for (ly, color, ink, key) in ((110, HUMAN, "#7a4b00", "human_to_ws"), (380, MASTER, "#1b4b9c", "master_to_ws"), (690, AGENT, "#1d6b3a", "agents_to_ws")):
+    text(MX + MW - 14, ly + 22, plain(LOCAL["arrows"][key]), 10, fill=ink, anchor="end")
+    line(MX + MW, ly + 18, RX, ly + 18, color)
 
 text(40, 1155, plain(LOCAL["footer"]), 10.8, fill=SLATE)
 parts.append("</svg>")

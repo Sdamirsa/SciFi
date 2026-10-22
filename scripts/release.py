@@ -15,7 +15,7 @@ match. A release is the tag v<version> plus a GitHub release whose assets are th
 files, so claude.ai users download from the release page and plugin users install the tag.
 
 check fails (exit 1) when: versions disagree; CHANGELOG.md has no "## <version>" heading;
-the unit tests or the example-workspace validation fail; the anatomy page has a dead link;
+the unit tests or the example-workspace validation fail; the anatomy page has a dead link; a built workflow is stale;
 dist/ or docs/ are not rebuilt from the current sources; the working tree is dirty; or the
 tag already exists. bump refuses a version that is not greater than the current one.
 """
@@ -58,6 +58,7 @@ def changelog_section(v):
 
 
 def rebuild():
+    run([sys.executable, "scripts/build_workflows.py"])
     run([sys.executable, "docs/make_figure.py"])
     run([sys.executable, "docs/make_anatomy.py", "--check"])
     run([sys.executable, "scripts/package_skills.py"])
@@ -86,6 +87,9 @@ def check(args):
     r = run([sys.executable, "docs/make_anatomy.py", "--check"], check=False)
     if r.returncode != 0:
         problems.append("anatomy page: " + r.stderr.strip())
+    r = run([sys.executable, "scripts/build_workflows.py", "--check"], check=False)
+    if r.returncode != 0:
+        problems.append("workflows: " + r.stderr.strip())
     if not args.no_rebuild:
         run([sys.executable, "docs/make_figure.py"])
         run([sys.executable, "scripts/package_skills.py"])

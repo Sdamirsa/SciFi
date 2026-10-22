@@ -22,7 +22,10 @@ packages for claude.ai in `dist/`. User docs start at `README.md`.
   exits non-zero on failure. Paths resolve via `${CLAUDE_PLUGIN_ROOT}` and, when copied,
   relative to `.claude/`; document both.
 - A schema change updates `scripts/schemas/`, `docs/protocol.md` and every writer of that
-  file in the same change.
+  file in the same change, then `python3 scripts/build_workflows.py` (the envelope schema is
+  inlined into `workflows/*.js`).
+- `workflows/*.js` are built files. Edit `scripts/workflow_templates/*.js`, rebuild, and run
+  the tests; `scripts/tests/_workflow_harness.js` runs a script with mock agents.
 - Every JSON under `example-workspace/` must pass `python3 scripts/validate_json.py <file>`.
 - No real manuscript, patient or unpublished data in the repo. The example study is invented.
 - `dist/*.skill` is committed. Rebuild it when `skills/scientific-writing/` or
@@ -38,7 +41,7 @@ python3 -m unittest discover -s scripts/tests -v
 for f in $(find example-workspace -name '*.json'); do python3 scripts/validate_json.py "$f" || exit 1; done
 ```
 
-## After changing skills, agents or hooks
+## After changing skills, agents, hooks or workflows
 
 Run the `design-reviewer` agent with a brief listing the changed files. It audits them
 against `skills/system-design-review/rubric.md` and returns findings. Resolve every FAIL

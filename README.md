@@ -17,7 +17,7 @@ The same figure as a clickable page, with a claude.ai view: [sdamirsa.github.io/
 2. **Skeleton**: a reverse outline, each paragraph with a takeaway and the thread it serves.
 3. **Figures**: a display-item plan with captions.
 4. **Paragraph loop**: logic map, five checks (flow, local, global, evidence, style), synthesis, draft, standards gate.
-5. **Review**: reviewer-style comments with location and rule, a verdict, and optional minimal diffs.
+5. **Review**: reviewer-style comments with location and rule, a verdict, and optional minimal diffs. On a whole manuscript the checks run as one background workflow, one agent per unit and axis.
 6. **Ritual**: `/project-memory` logs the session, curates lessons and sets the next action.
 
 ## Install
@@ -62,8 +62,9 @@ skills/
   panel-discussion/ decision utility
   project-memory/   the end-of-session ritual
   system-design-review/  maintainer rubric
-agents/             the sub-agents (checkers, drafter, gate, improver, design-reviewer)
+agents/             the sub-agents (checkers, drafter, gate, improver, noter, labeler, scribe, design-reviewer)
 hooks/              session-start, validate-json, stop-pointer
+workflows/          review-all and literature-all, dynamic workflows for the batch parts of a stage
 scripts/            validate_json, init_workspace, state, bbt_check, export_docx, install_local, release; schemas/
 example-workspace/  what a user folder looks like
 docs/               protocol, workflows, architecture, installation, claude-ai, zotero-guide, the figure and the anatomy page

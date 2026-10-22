@@ -21,6 +21,12 @@ Initial release.
 - `scripts/release.py`: version check, bump, tag and GitHub release with the dist files attached.
 - `scifi-lite` writes `handshakes/<id>.synthesis.r<n>.json`, the plugin's name, so a workspace moves between the two without renaming.
 
+## 0.2.0 (2026-10-22)
+- Dynamic workflows for the two batch fan-outs: `workflows/review-all.js` (logic map and five checks on every unit in parallel, then the manuscript pass) and `workflows/literature-all.js` (one noter or labeler per paper). They write the same briefs and envelopes as a dispatch, validated by the runtime against the envelope schema and stored by a scribe stage, and return counts rather than content. Protocol section 12.
+- Agents `noter` and `labeler` for the literature stages, which previously had no agent file to dispatch, and `scribe` (Write and the validator only) for the workflow stages that store files.
+- `scripts/build_workflows.py` builds the scripts from `scripts/workflow_templates/` with the envelope schema inlined; `scripts/tests/_workflow_harness.js` runs them end to end with mock agents in the tests.
+- `install_local.sh` and the `.claude/` zip carry `workflows/` with the agent prefix removed.
+
 ## Planned
 
 - Detect hand edits to accepted drafts by storing a hash of each draft in STATE.json and comparing on resume (sets the unit to human-edited).
