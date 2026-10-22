@@ -4,8 +4,8 @@
 docs/index.html (the clickable anatomy page) from both views. Change a skill, agent, hook or
 workspace file here, then re-run both scripts.
 
-Every text item is a list of spans, each span `(text, href)` where href is None or a path in
-the repo (file or folder, with an optional #anchor). The page turns paths into GitHub links;
+Every text item is a list of spans, each span `(text, href)` where href is None, a path in
+the repo (file or folder, with an optional #anchor), or a full https URL. The page turns paths into GitHub links;
 the figure prints the text only. Stdlib only.
 """
 
@@ -74,7 +74,7 @@ LOCAL = {
         ("", S(("scripts/", "scripts")), S(("validate_json", "scripts/validate_json.py"), ", ", ("state", "scripts/state.py"), ", ", ("init_workspace", "scripts/init_workspace.py"), ", ", ("export_docx", "scripts/export_docx.py"), ", ", ("release", "scripts/release.py"), ", ", ("schemas/", "scripts/schemas"))),
         ("", S(("example-workspace/", "example-workspace")), S("the invented echo study, every JSON valid")),
         ("", S(("docs/", "docs")), S(("protocol", "docs/protocol.md"), ", ", ("workflows", "docs/workflows.md"), ", ", ("architecture", "docs/architecture.md"), ", ", ("zotero-guide", "docs/zotero-guide.md"), ", ", ("this figure", "docs/make_figure.py"), ", ", ("this page", "docs/make_anatomy.py"))),
-        ("", S(("dist/", "dist")), S(("scientific-writing.skill", "dist/scientific-writing.skill"), ", ", ("scifi-lite.skill", "dist/scifi-lite.skill"), ", ", ("SciFi-dotclaude.zip", "dist/SciFi-dotclaude.zip"))),
+        ("", S(("dist/", "dist")), S(("scientific-writing.skill", "dist/scientific-writing.skill"), ", ", ("scifi-lite.skill", "dist/scifi-lite.skill"), ", ", ("SciFi-dotclaude.zip (release asset)", "https://github.com/Sdamirsa/SciFi/releases/latest"))),
         ("", S(("research/", "research")), S("the 28 paper analyses behind the standards")),
     ],
     "lanes": {

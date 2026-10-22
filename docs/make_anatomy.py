@@ -24,6 +24,8 @@ VERSION = json.loads((REPO / ".claude-plugin" / "plugin.json").read_text())["ver
 
 
 def gh(href):
+    if href.startswith("https://"):
+        return href
     path, _, anchor = href.partition("#")
     if path == "":
         url = GITHUB
@@ -58,6 +60,8 @@ def rows(items, name_cls="name", desc_cls="desc"):
 def check_links():
     missing = []
     for href in all_hrefs():
+        if href.startswith("https://"):
+            continue
         path, _, anchor = href.partition("#")
         target = REPO / path if path else REPO
         if not target.exists():
