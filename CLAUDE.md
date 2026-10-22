@@ -27,6 +27,9 @@ packages for claude.ai in `dist/`. User docs start at `README.md`.
 - No real manuscript, patient or unpublished data in the repo. The example study is invented.
 - `dist/*.skill` is committed. Rebuild it when `skills/scientific-writing/` or
   `skills/scifi-lite/` changes.
+- The system figure and the anatomy page share `docs/anatomy_data.py`. When a skill, agent,
+  hook, script or workspace file is added, renamed or removed, change it there and run
+  `python3 docs/make_figure.py && node docs/render_figure.js && python3 docs/make_anatomy.py --check`.
 
 ## Test
 
@@ -40,3 +43,11 @@ for f in $(find example-workspace -name '*.json'); do python3 scripts/validate_j
 Run the `design-reviewer` agent with a brief listing the changed files. It audits them
 against `skills/system-design-review/rubric.md` and returns findings. Resolve every FAIL
 before merging, and record notable changes in `CHANGELOG.md`.
+
+## Release
+
+The version lives in `.claude-plugin/plugin.json` and `scripts/release.py` keeps everything
+else in step. `bump <patch|minor|major>` sets it, opens the CHANGELOG heading and rebuilds
+`docs/` and `dist/`; `check` verifies versions, changelog, tests, example JSON, page links and
+a clean tree; `tag` makes `v<version>`; `publish` pushes and creates the GitHub release with
+the three dist files attached. Users on claude.ai download from the release page.

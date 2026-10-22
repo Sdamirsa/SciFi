@@ -14,10 +14,12 @@ Initial release.
 - `scifi-lite` and `scientific-writing` packages for claude.ai.
 - Example workspace with an invented study.
 
-## 0.1.1
-
+## 0.1.1 (2026-10-22)
 - `scifi-stats` skill: method selection from question, data type and design via a method map, a complexity guard against paper-specific methods, reporting rules and an analysis-plan template.
 - `scifi-export` skill and `scripts/export_docx.py`: Word export with Scannable Cite markers that Zotero's ODF/DOCX Scan turns into live citation fields, with the Google Docs handoff steps in the Zotero guide.
+- Anatomy page `docs/index.html` (GitHub Pages): the system figure as a clickable page with a Claude Code view and a claude.ai view; every node opens its file, folder, schema or document. Content for the figure and the page now comes from `docs/anatomy_data.py`.
+- `scripts/release.py`: version check, bump, tag and GitHub release with the dist files attached.
+- `scifi-lite` writes `handshakes/<id>.synthesis.r<n>.json`, the plugin's name, so a workspace moves between the two without renaming.
 
 ## Planned
 

@@ -25,7 +25,7 @@
 <text x="56" y="389" font-size="12" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">  scifi-review/</text>
 <text x="240" y="389" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">evaluation, comments.json, improvements</text>
 <text x="56" y="416" font-size="12" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">  scifi-export/</text>
-<text x="240" y="416" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Word with live Zotero citations, then Google Docs</text>
+<text x="240" y="416" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">Word with live Zotero citations, then Google Docs (guide)</text>
 <text x="56" y="443" font-size="12" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">  scifi-stats/</text>
 <text x="240" y="443" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">which biostatistical method, with a complexity guard</text>
 <text x="56" y="470" font-size="12" font-weight="normal" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">  scifi-lite/</text>
@@ -65,11 +65,11 @@
 <text x="56" y="929" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">hooks/</text>
 <text x="200" y="929" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">session-start, validate-json, stop-pointer</text>
 <text x="56" y="956" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">scripts/</text>
-<text x="200" y="956" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">validate_json, state, init_workspace, bbt_check, export_docx, schemas/</text>
+<text x="200" y="956" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">validate_json, state, init_workspace, export_docx, release, schemas/</text>
 <text x="56" y="983" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">example-workspace/</text>
 <text x="200" y="983" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">the invented echo study, every JSON valid</text>
 <text x="56" y="1010" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">docs/</text>
-<text x="200" y="1010" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">protocol, workflows, architecture, zotero-guide, this figure</text>
+<text x="200" y="1010" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">protocol, workflows, architecture, zotero-guide, this figure, this page</text>
 <text x="56" y="1037" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">dist/</text>
 <text x="200" y="1037" font-size="11" font-weight="normal" fill="#5a6472" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">scientific-writing.skill, scifi-lite.skill, SciFi-dotclaude.zip</text>
 <text x="56" y="1064" font-size="12" font-weight="bold" fill="#1c2330" text-anchor="start" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace">research/</text>
@@ -149,10 +149,10 @@
 <text x="770" y="881" font-size="10.5" font-weight="normal" fill="#333" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">one pass: PASS, or RETURN with three blockers</text>
 <rect x="622" y="901" width="105" height="15" rx="7" fill="#5a8f6a"/>
 <text x="674.5" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet medium</text>
-<rect x="730" y="901" width="84" height="15" rx="7" fill="#7a9d85"/>
-<text x="772.0" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet low</text>
-<rect x="815" y="901" width="63" height="15" rx="7" fill="#2a8a56"/>
-<text x="846.5" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">inherit</text>
+<rect x="735" y="901" width="84" height="15" rx="7" fill="#7a9d85"/>
+<text x="777.0" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">sonnet low</text>
+<rect x="827" y="901" width="63" height="15" rx="7" fill="#2a8a56"/>
+<text x="858.5" y="912" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">inherit</text>
 <text x="890" y="912" font-size="10.3" font-weight="normal" fill="#1d6b3a" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">five checks run in parallel; the two inherit agents run after</text>
 <path d="M940.0,355 L940.0,380" stroke="#b8732a" stroke-width="1.6" fill="none" marker-end="url(#arr-b8732a)"/>
 <text x="948.0" y="371" font-size="10" font-weight="normal" fill="#7a4b00" text-anchor="start" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">command, mode, journal</text>

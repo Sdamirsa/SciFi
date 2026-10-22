@@ -27,7 +27,7 @@ be continued in Claude Code.
 
 - **Files available** (an uploaded folder, a project, code execution): use the workspace
   layout of protocol section 2. Write `Thinking-space/units/<id>.logic.json`,
-  `handshakes/<id>.<role>.r<n>.json` per check, `handshakes/<id>.synthesis.json`,
+  `handshakes/<id>.<role>.r<n>.json` per check, `handshakes/<id>.synthesis.r<n>.json`,
   `units/<id>.draft.md`, and `STATE.json`. With code execution, validate each JSON against
   its schema before moving on.
 - **No files**: present each artifact inline as a fenced `json` block headed with its path,
@@ -82,7 +82,7 @@ Each check reads only its own rules and the inputs named, and judges only its ow
      "significant" without its test, number format.
 3. **Synthesis.** Merge findings at the same location, order by severity, resolve each
    (accept, reject with a rule or the human's decision, defer to a named unit) per mode.
-   Collect NEEDs. Write `handshakes/<id>.synthesis.json`. In co-thinker mode show the
+   Collect NEEDs. Write `handshakes/<id>.synthesis.r<n>.json`. In co-thinker mode show the
    findings and your picks and wait for agreement.
 4. **drafter.** Rewrite from the logic map and the accepted findings only. Every claim in
    order with its evidence marker, no new claims, no new numbers, pandoc citations. Keep the

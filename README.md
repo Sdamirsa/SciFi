@@ -9,6 +9,8 @@ never edits your manuscript or your literature folder.
 
 ![SciFi system](docs/scifi-system.png)
 
+The same figure as a clickable page, with a claude.ai view: [sdamirsa.github.io/SciFi](https://sdamirsa.github.io/SciFi/).
+
 ## What it does
 
 1. **Spine**: one central claim, the gap, the results with their numbers, the implications, and the threads linking them.
@@ -62,10 +64,10 @@ skills/
   system-design-review/  maintainer rubric
 agents/             the sub-agents (checkers, drafter, gate, improver, design-reviewer)
 hooks/              session-start, validate-json, stop-pointer
-scripts/            validate_json, init_workspace, state, bbt_check, export_docx, install_local; schemas/
+scripts/            validate_json, init_workspace, state, bbt_check, export_docx, install_local, release; schemas/
 example-workspace/  what a user folder looks like
-docs/               protocol, workflows, architecture, installation, claude-ai, zotero-guide
-dist/               the .skill packages for claude.ai
+docs/               protocol, workflows, architecture, installation, claude-ai, zotero-guide, the figure and the anatomy page
+dist/               the .skill packages for claude.ai, also attached to each GitHub release
 research/           the paper analyses behind the standards
 ```
 

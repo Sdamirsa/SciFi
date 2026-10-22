@@ -1,0 +1,422 @@
+<title>SciFi Anatomy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The anatomy of SciFi: repo, actors and workspace, every node linked to its file. Toggle between the Claude Code plugin and the claude.ai skills.">
+<style>
+/* Layout: the system figure as three columns (repo, three actor lanes, workspace); stacks to one column on phones. */
+:root {
+  --bg: #ffffff; --fg: #1c2330; --slate: #5a6472; --rule: #c9d1d9; --panel: #fbfcfe; --dark-text: #333333;
+  --human: #b8732a; --human-bg: #fff5e8; --human-ink: #7a4b00;
+  --master: #1f5fbf; --master-bg: #eaf1fd; --master-ink: #1b4b9c;
+  --agent: #2a8a56; --agent-bg: #eaf6ee; --agent-ink: #1d6b3a;
+  --link-line: rgba(28, 35, 48, 0.28); --focus: #1f5fbf; --tab-bg: #f0f3f7;
+  --mono: Menlo, Consolas, "DejaVu Sans Mono", ui-monospace, monospace;
+  --sans: Helvetica, Arial, "DejaVu Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f141b; --fg: #e6ebf0; --slate: #9aa6b4; --rule: #2b3542; --panel: #141b24; --dark-text: #cfd6de;
+  --human: #d4924a; --human-bg: #2a2015; --human-ink: #f0c68a;
+  --master: #5b8fe6; --master-bg: #141f33; --master-ink: #a9c4f5;
+  --agent: #4fb27c; --agent-bg: #132619; --agent-ink: #9fdcb8;
+  --link-line: rgba(230, 235, 240, 0.3); --focus: #8fb4f0; --tab-bg: #1a222c; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #0f141b; --fg: #e6ebf0; --slate: #9aa6b4; --rule: #2b3542; --panel: #141b24; --dark-text: #cfd6de;
+  --human: #d4924a; --human-bg: #2a2015; --human-ink: #f0c68a;
+  --master: #5b8fe6; --master-bg: #141f33; --master-ink: #a9c4f5;
+  --agent: #4fb27c; --agent-bg: #132619; --agent-ink: #9fdcb8;
+  --link-line: rgba(230, 235, 240, 0.3); --focus: #8fb4f0; --tab-bg: #1a222c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 13px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 28px; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--link-line); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+.wrap { max-width: 1660px; margin: 0 auto; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 4px; }
+h1 { font-size: 24px; margin: 0; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.version { font-family: var(--mono); font-size: 11.5px; color: var(--slate); }
+.tabs { margin-left: auto; display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--tab-bg); }
+.tabs button { font: inherit; font-size: 12px; font-weight: 600; color: var(--slate); background: transparent; border: 0; padding: 7px 12px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--bg); color: var(--fg); box-shadow: inset 0 0 0 1px var(--rule); }
+.subtitle { color: var(--slate); font-size: 12.5px; margin: 0 0 14px; max-width: 1100px; }
+.cols { display: grid; grid-template-columns: minmax(0, 10fr) minmax(0, 11fr) minmax(0, 9fr); gap: 18px; align-items: start; }
+.col { min-width: 0; }
+.box { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px 12px; }
+.col-title { font-size: 14.5px; font-weight: 700; margin: 0 0 12px; font-family: var(--mono); }
+.col-title a { font-family: var(--mono); }
+.rows { display: flex; flex-direction: column; gap: 5px; }
+.row { display: grid; grid-template-columns: minmax(118px, max-content) minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+.rows.ws .row { grid-template-columns: minmax(150px, max-content) minmax(0, 1fr); }
+.row.lvl1 { padding-left: 14px; }
+.row.lvl2 { padding-left: 28px; }
+.name { font-family: var(--mono); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.lvl1 .name, .lvl2 .name { font-weight: 400; }
+.desc { color: var(--slate); font-size: 11px; min-width: 0; white-space: pre-wrap; }
+.desc.dark { color: var(--dark-text); }
+.mono { font-family: var(--mono); font-size: 11px; }
+.bold { font-weight: 700; }
+.col-foot { color: var(--slate); font-size: 11px; margin: 14px 0 0; border-top: 1px dashed var(--rule); padding-top: 8px; }
+.lanes { display: flex; flex-direction: column; gap: 0; }
+.lane { border-radius: 10px; border: 1.5px solid; padding: 12px 14px 12px; }
+.lane.human { background: var(--human-bg); border-color: var(--human); }
+.lane.master { background: var(--master-bg); border-color: var(--master); }
+.lane.agents { background: var(--agent-bg); border-color: var(--agent); }
+.lane-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
+.lane h2 { font-size: 12.5px; margin: 0; font-weight: 700; }
+.human h2 { color: var(--human); } .master h2 { color: var(--master); } .agents h2 { color: var(--agent); }
+.lane h3 { font-size: 11.5px; font-weight: 700; margin: 0 0 6px; }
+.to-ws { font-size: 10px; white-space: nowrap; }
+.human-ink { color: var(--human-ink); } .master-ink { color: var(--master-ink); } .agent-ink { color: var(--agent-ink); }
+.cmds, .steps, .agent-rows { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.cmd, .agent { display: grid; grid-template-columns: minmax(130px, max-content) minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+.cmd .desc { font-size: 10.5px; }
+.step { display: grid; grid-template-columns: 18px minmax(96px, max-content) minmax(0, 1fr); column-gap: 8px; align-items: baseline; }
+.num { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; background: var(--master); color: #fff; font-size: 10px; font-weight: 700; align-items: center; justify-content: center; align-self: center; }
+.step-name { font-weight: 700; font-size: 12px; }
+.step .desc { font-size: 10.8px; }
+.agent .desc { font-size: 10.5px; }
+.note { font-size: 11px; margin: 3px 0 0; }
+.master-note { font-size: 10.8px; }
+.between { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; font-size: 10px; padding: 7px 18px; }
+.dashed { opacity: 0.9; }
+.pills { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 2px 0 0; }
+.pill { color: #fff; font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 8px; text-decoration: none; line-height: 1.3; }
+.pill:hover { text-decoration: underline; }
+.pill-note { font-size: 10.3px; margin-left: 4px; }
+.rules { background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px 8px; margin-top: 16px; }
+.rules h3 { font-size: 12px; margin: 0 0 6px; }
+.rules ul { margin: 0; padding-left: 16px; font-size: 10.5px; color: var(--dark-text); }
+.rules li { margin: 2px 0; }
+.footer { color: var(--slate); font-size: 11px; margin: 16px 0 0; }
+@media (max-width: 1100px) {
+  .cols { grid-template-columns: 1fr; }
+  .name, .to-ws { white-space: normal; }
+}
+@media (max-width: 560px) {
+  .row, .cmd, .agent { grid-template-columns: 1fr; row-gap: 1px; }
+  .step { grid-template-columns: 18px minmax(0, 1fr); }
+  .step .desc { grid-column: 2; }
+  .rows.ws .row { grid-template-columns: 1fr; }
+  .tabs { margin-left: 0; }
+  h1 { font-size: 20px; }
+}
+@media (prefers-reduced-motion: no-preference) { .tabs button { transition: background 0.15s; } }
+</style>
+<div class="wrap">
+  <header>
+    <h1 id="page-title">SciFi: scientific manuscripts from findings to inference</h1>
+    <a class="version" href="https://github.com/Sdamirsa/SciFi/releases/tag/v0.1.1" target="_blank" rel="noopener">v0.1.1</a>
+    <div class="tabs" role="tablist" aria-label="Where SciFi runs"><button type="button" role="tab" id="tab-local" data-view="local" aria-selected="true" aria-controls="view-local">Claude Code (plugin or .claude/)</button><button type="button" role="tab" id="tab-ai" data-view="ai" aria-selected="false" aria-controls="view-ai">claude.ai (two .skill files)</button></div>
+  </header>
+
+<section class="view" id="view-local" data-view="local">
+  <p class="subtitle">One repo, three ways to run it (Claude Code plugin, copied .claude/ folder, claude.ai skills). Three actors. Every handoff is a JSON file in the workspace, validated on write.</p>
+  <div class="cols">
+    <div class="col box">
+      <h2 class="col-title"><a href="https://github.com/Sdamirsa/SciFi" target="_blank" rel="noopener">SciFi/</a>  (the repo, github.com/Sdamirsa/SciFi)</h2>
+      <div class="rows">
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/.claude-plugin" target="_blank" rel="noopener">.claude-plugin/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/.claude-plugin/plugin.json" target="_blank" rel="noopener">plugin.json</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/.claude-plugin/marketplace.json" target="_blank" rel="noopener">marketplace.json</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills" target="_blank" rel="noopener">skills/</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi/SKILL.md" target="_blank" rel="noopener">scifi/</a></span><span class="desc">master orchestrator, entry /scifi, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi/stages.md" target="_blank" rel="noopener">stages.md</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">scientific-writing/</a></span><span class="desc">the standards from 14 papers, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/scripts/check_manuscript.py" target="_blank" rel="noopener">checker</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/checklist.md" target="_blank" rel="noopener">checklist</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/journal-profiles.md" target="_blank" rel="noopener">journals</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-spine/SKILL.md" target="_blank" rel="noopener">scifi-spine/</a></span><span class="desc">central claim, gap, results, threads of evidence</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-skeleton/SKILL.md" target="_blank" rel="noopener">scifi-skeleton/</a></span><span class="desc">reverse outline per section from the threads</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-paragraph/SKILL.md" target="_blank" rel="noopener">scifi-paragraph/</a></span><span class="desc">the paragraph loop: map, 5 checks, draft, gate (<a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-paragraph/loop.md" target="_blank" rel="noopener">loop.md</a>)</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-figures/SKILL.md" target="_blank" rel="noopener">scifi-figures/</a></span><span class="desc">figure and table <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-figures/references/brainstorm.md" target="_blank" rel="noopener">brainstorm</a>, captions, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-figures/references/corpus-figures.md" target="_blank" rel="noopener">corpus figures</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/SKILL.md" target="_blank" rel="noopener">scifi-literature/</a></span><span class="desc">scout, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/references/note-template.md" target="_blank" rel="noopener">notes</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/references/ontology.md" target="_blank" rel="noopener">ontology</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/references/labeling-rules.md" target="_blank" rel="noopener">labels</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/references/lookup.md" target="_blank" rel="noopener">evidence lookup</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-review/SKILL.md" target="_blank" rel="noopener">scifi-review/</a></span><span class="desc">evaluation, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/comments.schema.json" target="_blank" rel="noopener">comments.json</a>, improvements</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-export/SKILL.md" target="_blank" rel="noopener">scifi-export/</a></span><span class="desc">Word with live Zotero citations, then Google Docs (<a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/zotero-guide.md" target="_blank" rel="noopener">guide</a>)</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-stats/SKILL.md" target="_blank" rel="noopener">scifi-stats/</a></span><span class="desc">which biostatistical method, with a <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-stats/references/complexity-guard.md" target="_blank" rel="noopener">complexity guard</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">scifi-lite/</a></span><span class="desc">single-session version for claude.ai</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/SKILL.md" target="_blank" rel="noopener">project-memory/</a></span><span class="desc">the ritual: <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/STATUS.template.md" target="_blank" rel="noopener">STATUS</a>, Project-log, LESSONS</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/panel-discussion/SKILL.md" target="_blank" rel="noopener">panel-discussion/</a></span><span class="desc">decision utility</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/system-design-review/SKILL.md" target="_blank" rel="noopener">system-design-review/</a></span><span class="desc">maintainer <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/system-design-review/rubric.md" target="_blank" rel="noopener">rubric</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/agents" target="_blank" rel="noopener">agents/</a></span><span class="desc">12 sub-agents</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/logic-mapper.md" target="_blank" rel="noopener">logic-mapper</a></span><span class="desc">sonnet, medium</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/flow-checker.md" target="_blank" rel="noopener">flow-checker</a></span><span class="desc">sonnet, medium   internal alignment</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/local-aligner.md" target="_blank" rel="noopener">local-aligner</a></span><span class="desc">sonnet, medium   previous and next unit</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/global-aligner.md" target="_blank" rel="noopener">global-aligner</a></span><span class="desc">sonnet, medium   spine, results, skeleton</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/evidence-checker.md" target="_blank" rel="noopener">evidence-checker</a></span><span class="desc">sonnet, medium   claims vs sources and results</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/style-checker.md" target="_blank" rel="noopener">style-checker</a></span><span class="desc">sonnet, low      length, standards, script</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/literature-scout.md" target="_blank" rel="noopener">literature-scout</a></span><span class="desc">sonnet, low      read-only lookup</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/figure-brainstormer.md" target="_blank" rel="noopener">figure-brainstormer</a></span><span class="desc">sonnet, medium   display-item candidates</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/drafter.md" target="_blank" rel="noopener">drafter</a></span><span class="desc">inherit: your session model</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/standards-gate.md" target="_blank" rel="noopener">standards-gate</a></span><span class="desc">inherit: one pass, PASS or RETURN</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/improver.md" target="_blank" rel="noopener">improver</a></span><span class="desc">inherit: accepted comments as diffs</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/design-reviewer.md" target="_blank" rel="noopener">design-reviewer</a></span><span class="desc">inherit: audits SciFi itself</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/hooks.json" target="_blank" rel="noopener">hooks/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/session-start.sh" target="_blank" rel="noopener">session-start</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/validate-json.sh" target="_blank" rel="noopener">validate-json</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/stop-pointer.sh" target="_blank" rel="noopener">stop-pointer</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/scripts" target="_blank" rel="noopener">scripts/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/validate_json.py" target="_blank" rel="noopener">validate_json</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/state.py" target="_blank" rel="noopener">state</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/init_workspace.py" target="_blank" rel="noopener">init_workspace</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/export_docx.py" target="_blank" rel="noopener">export_docx</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/release.py" target="_blank" rel="noopener">release</a>, <a href="https://github.com/Sdamirsa/SciFi/tree/main/scripts/schemas" target="_blank" rel="noopener">schemas/</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace" target="_blank" rel="noopener">example-workspace/</a></span><span class="desc">the invented echo study, every JSON valid</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/docs" target="_blank" rel="noopener">docs/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md" target="_blank" rel="noopener">protocol</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/workflows.md" target="_blank" rel="noopener">workflows</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/architecture.md" target="_blank" rel="noopener">architecture</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/zotero-guide.md" target="_blank" rel="noopener">zotero-guide</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/make_figure.py" target="_blank" rel="noopener">this figure</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/make_anatomy.py" target="_blank" rel="noopener">this page</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/dist" target="_blank" rel="noopener">dist/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scientific-writing.skill" target="_blank" rel="noopener">scientific-writing.skill</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scifi-lite.skill" target="_blank" rel="noopener">scifi-lite.skill</a>, <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/SciFi-dotclaude.zip" target="_blank" rel="noopener">SciFi-dotclaude.zip</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/research" target="_blank" rel="noopener">research/</a></span><span class="desc">the 28 paper analyses behind the standards</span></div>
+      </div>
+      <p class="col-foot">&#8594; <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/installation.md" target="_blank" rel="noopener">loaded as skills, agents and hooks</a></p>
+    </div>
+
+    <div class="col lanes">
+      <div class="lane human">
+        <div class="lane-head"><h2>HUMAN</h2><span class="to-ws human-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#2-the-workspace" target="_blank" rel="noopener">manuscript, papers</a> &#8594;</span></div>
+        <h3>Types a command or a phrase</h3>
+        <div class="cmds">
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi/SKILL.md" target="_blank" rel="noopener">/scifi &lt;workspace&gt; [mode] [journal]</a></span><span class="desc">full pipeline, or resume from <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/STATE.json" target="_blank" rel="noopener">STATE.json</a></span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-paragraph/SKILL.md" target="_blank" rel="noopener">/scifi-paragraph d03</a></span><span class="desc">one paragraph through the loop</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-review/SKILL.md" target="_blank" rel="noopener">/scifi-review [file]</a></span><span class="desc">evaluate, comment, optionally improve</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-figures/SKILL.md" target="_blank" rel="noopener">/scifi-figures</a></span><span class="desc">brainstorm figures and tables</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/SKILL.md" target="_blank" rel="noopener">/scifi-literature</a></span><span class="desc">library, notes, ontology, labels</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-export/SKILL.md" target="_blank" rel="noopener">/scifi-export --library users/&lt;id&gt;</a></span><span class="desc">docx with live Zotero citations</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-stats/SKILL.md" target="_blank" rel="noopener">/scifi-stats</a></span><span class="desc">analysis plan: the standard method for the question</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/SKILL.md" target="_blank" rel="noopener">/project-memory</a></span><span class="desc">end-of-session ritual, user only</span></div>
+        </div>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#6-control-modes" target="_blank" rel="noopener">Decides at gates: picks one option, approves diffs, answers NEED requests.</a></p>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#1-actors" target="_blank" rel="noopener">Owns Manuscript/ and Literature/. The system reads them and never edits them.</a></p>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/workflows.md#control-modes" target="_blank" rel="noopener">Modes: co-thinker (default), human-on-the-loop, human-in-the-loop, fully-automated.</a></p>
+      </div>
+      <div class="between">
+        <span class="master-ink dashed">&#8593; <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#6-control-modes" target="_blank" rel="noopener">options with one pick at each gate</a></span>
+        <span class="human-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/workflows.md#commands-and-phrases" target="_blank" rel="noopener">command, mode, journal</a> &#8595;</span>
+      </div>
+      <div class="lane master">
+        <div class="lane-head"><h2>MASTER  (your session model: Opus or Fable)</h2><span class="to-ws master-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#8-active-memory-rules" target="_blank" rel="noopener">reads and writes</a> &#8594;</span></div>
+        <div class="steps">
+<div class="step"><span class="num">0</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/session-start.sh" target="_blank" rel="noopener">resume</a></span><span class="desc dark"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/state.py" target="_blank" rel="noopener">state.py session</a>; read STATE.json and the last decisions</span></div>
+<div class="step"><span class="num">1</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-spine/SKILL.md" target="_blank" rel="noopener">spine</a></span><span class="desc dark">claim, gap, results R1.., threads T1..  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/spine.schema.json" target="_blank" rel="noopener">spine.json</a></span></div>
+<div class="step"><span class="num">2</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-skeleton/SKILL.md" target="_blank" rel="noopener">skeleton</a></span><span class="desc dark">units with takeaway and thread  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/skeleton.schema.json" target="_blank" rel="noopener">skeleton.json</a></span></div>
+<div class="step"><span class="num">3</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-figures/SKILL.md" target="_blank" rel="noopener">figures</a></span><span class="desc dark">display-item plan, caption units  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/figures.schema.json" target="_blank" rel="noopener">figures.json</a></span></div>
+<div class="step"><span class="num">4</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-paragraph/loop.md" target="_blank" rel="noopener">paragraph loop</a></span><span class="desc dark"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/brief.schema.json" target="_blank" rel="noopener">brief</a>, store envelopes, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/synthesis.schema.json" target="_blank" rel="noopener">synthesis</a>, draft, gate</span></div>
+<div class="step"><span class="num">5</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-review/SKILL.md" target="_blank" rel="noopener">review</a></span><span class="desc dark">section and manuscript gates, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/comments.schema.json" target="_blank" rel="noopener">comments/*.json</a></span></div>
+<div class="step"><span class="num">6</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi/stages.md" target="_blank" rel="noopener">ritual and export</a></span><span class="desc dark"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/SKILL.md" target="_blank" rel="noopener">/project-memory</a> (user), <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-export/SKILL.md" target="_blank" rel="noopener">/scifi-export</a></span></div>
+        </div>
+<p class="note master-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#1-actors" target="_blank" rel="noopener">Only writer of STATE.json, spine, skeleton, figures, syntheses and the decisions log,</a></p>
+<p class="note master-note">through <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/state.py" target="_blank" rel="noopener">state.py</a>. Reads one unit, its logic.json and five envelopes at a time.</p>
+      </div>
+      <div class="between">
+        <span class="master-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/brief.schema.json" target="_blank" rel="noopener">briefs/&lt;task&gt;.json</a> &#8595;</span>
+        <span class="agent-ink">&#8593; <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/envelope.schema.json" target="_blank" rel="noopener">envelope JSON, stored in handshakes/</a></span>
+      </div>
+      <div class="lane agents">
+        <div class="lane-head"><h2>SUB-AGENTS  (isolated, one JSON brief in, one JSON envelope out)</h2><span class="to-ws agent-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#4-the-envelope-agent-to-master" target="_blank" rel="noopener">envelopes, unit files</a> &#8594;</span></div>
+        <h3>The paragraph loop for one unit</h3>
+        <div class="agent-rows">
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/logic-mapper.md" target="_blank" rel="noopener">logic-mapper</a></span><span class="desc dark">claims, evidence, steps of the text  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/logic.schema.json" target="_blank" rel="noopener">units/&lt;id&gt;.logic.json</a></span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/flow-checker.md" target="_blank" rel="noopener">flow-checker</a></span><span class="desc dark">internal: one point, context first, takeaway last, old to new</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/local-aligner.md" target="_blank" rel="noopener">local-aligner</a></span><span class="desc dark">neighbours: redundancy, pre-emption, bridge, single home</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/global-aligner.md" target="_blank" rel="noopener">global-aligner</a></span><span class="desc dark">spine and results: serves the claim, same gap, no new data</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/evidence-checker.md" target="_blank" rel="noopener">evidence-checker</a></span><span class="desc dark">each claim vs cited source, our results, or a logical step</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/style-checker.md" target="_blank" rel="noopener">style-checker</a></span><span class="desc dark">runs <a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/scripts/check_manuscript.py" target="_blank" rel="noopener">check_manuscript.py</a>, then the <a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/references/sections" target="_blank" rel="noopener">section standards</a></span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/drafter.md" target="_blank" rel="noopener">drafter</a></span><span class="desc dark">redrafts from logic.json and the accepted findings  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/units/d03.draft.md" target="_blank" rel="noopener">units/&lt;id&gt;.draft.md</a></span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/agents/standards-gate.md" target="_blank" rel="noopener">standards-gate</a></span><span class="desc dark">one pass: PASS, or RETURN with three blockers</span></div>
+        </div>
+        <p class="pills"><a class="pill" style="background:#5a8f6a" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#7-model-routing-and-effort" target="_blank" rel="noopener">sonnet medium</a><a class="pill" style="background:#7a9d85" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#7-model-routing-and-effort" target="_blank" rel="noopener">sonnet low</a><a class="pill" style="background:#2a8a56" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#7-model-routing-and-effort" target="_blank" rel="noopener">inherit</a><span class="agent-ink pill-note">five checks run in parallel; the two inherit agents run after</span></p>
+      </div>
+    </div>
+
+    <div class="col box">
+      <h2 class="col-title"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace" target="_blank" rel="noopener">&lt;your-paper&gt;/</a>  (the workspace)</h2>
+      <div class="rows ws">
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Manuscript" target="_blank" rel="noopener">Manuscript/</a></span><span class="desc">YOU write here, pandoc [@citekey]</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/title.md" target="_blank" rel="noopener">title.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/abstract.md" target="_blank" rel="noopener">abstract.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/introduction.md" target="_blank" rel="noopener">introduction.md</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/methods.md" target="_blank" rel="noopener">methods.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/results.md" target="_blank" rel="noopener">results.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/discussion.md" target="_blank" rel="noopener">discussion.md</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Manuscript/figures" target="_blank" rel="noopener">figures/</a>  <a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Manuscript/tables" target="_blank" rel="noopener">tables/</a></span><span class="desc">your drafts, data, images</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Literature" target="_blank" rel="noopener">Literature/</a></span><span class="desc">YOU provide</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Literature/library.json" target="_blank" rel="noopener">library.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/zotero-guide.md" target="_blank" rel="noopener">Better CSL JSON (citation keys)</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/zotero-guide.md#export-to-word-and-google-docs-with-live-citations" target="_blank" rel="noopener">library.bbt.json</a></span><span class="desc">Better BibTeX JSON (item keys)</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Literature/fulltext" target="_blank" rel="noopener">fulltext/&lt;citekey&gt;.pdf|.md</a></span><span class="desc">the cited papers</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-literature/SKILL.md" target="_blank" rel="noopener">notes/  ontology.yaml  labels/</a></span><span class="desc">written by scifi-literature only</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space" target="_blank" rel="noopener">Thinking-space/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/validate-json.sh" target="_blank" rel="noopener">SYSTEM owns, all validated JSON</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/STATE.json" target="_blank" rel="noopener">STATE.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/state.schema.json" target="_blank" rel="noopener">stage, mode, journal, next action</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-stats/references/reporting.md" target="_blank" rel="noopener">analysis-plan.md</a></span><span class="desc">question, data, method, what is reported</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/spine.json" target="_blank" rel="noopener">spine.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/spine.schema.json" target="_blank" rel="noopener">claim, gap, results, implications, threads</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/skeleton.json" target="_blank" rel="noopener">skeleton.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/skeleton.schema.json" target="_blank" rel="noopener">units per section, takeaway, thread</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/figures.json" target="_blank" rel="noopener">figures.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/figures.schema.json" target="_blank" rel="noopener">display-item plan and captions</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/units" target="_blank" rel="noopener">units/&lt;id&gt;.logic.json, .draft.md</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/logic.schema.json" target="_blank" rel="noopener">one unit&#x27;s logic and drafts</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/briefs" target="_blank" rel="noopener">briefs/&lt;task&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/brief.schema.json" target="_blank" rel="noopener">what the master sent</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/handshakes" target="_blank" rel="noopener">handshakes/&lt;task&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/envelope.schema.json" target="_blank" rel="noopener">what the agent returned</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/handshakes/d03.synthesis.r1.json" target="_blank" rel="noopener">handshakes/&lt;id&gt;.synthesis.r&lt;n&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/synthesis.schema.json" target="_blank" rel="noopener">the master&#x27;s decisions</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/comments/d02.json" target="_blank" rel="noopener">comments/&lt;id&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/comments.schema.json" target="_blank" rel="noopener">review comments with severity and fix</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/log/decisions.jsonl" target="_blank" rel="noopener">log/decisions.jsonl</a></span><span class="desc">append-only: who decided what, why</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/scratch" target="_blank" rel="noopener">scratch/</a></span><span class="desc">option exploration, inspectable</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-export/SKILL.md" target="_blank" rel="noopener">export/</a></span><span class="desc">docx with Zotero markers, report</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/.claude" target="_blank" rel="noopener">.claude/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/SKILL.md" target="_blank" rel="noopener">memory spine (minimal dot-claude-iff)</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/.claude/STATUS.md" target="_blank" rel="noopener">STATUS.md</a></span><span class="desc">read first; rewritten by the ritual</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/.claude/Project-log.jsonl" target="_blank" rel="noopener">Project-log.jsonl</a></span><span class="desc">one line per real thing</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/.claude/LESSONS.jsonl" target="_blank" rel="noopener">LESSONS.jsonl</a></span><span class="desc">mistakes with a checkable prevention</span></div>
+      </div>
+      <div class="rules">
+        <h3>Rules that hold everywhere</h3>
+        <ul>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#1-actors" target="_blank" rel="noopener">Human owns Manuscript/ and Literature/; the system never edits them.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#1-actors" target="_blank" rel="noopener">Master owns Thinking-space/ and is the only writer of shared files.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#3-the-brief-master-to-agent" target="_blank" rel="noopener">Sub-agents read only the paths in their brief and return one envelope.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/hooks/validate-json.sh" target="_blank" rel="noopener">validate-json rejects any malformed JSON on write (exit 2).</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#11-honesty" target="_blank" rel="noopener">No number that is not in results.md; no source that is not in the library.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#11-honesty" target="_blank" rel="noopener">A missing source is a NEED, never a guess. A missing envelope is not a pass.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#10-resume" target="_blank" rel="noopener">Resume = STATE.json, then the tail of log/decisions.jsonl.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#8-active-memory-rules" target="_blank" rel="noopener">Accepted units are never redrafted; human edits are never overwritten.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">Standards: sentences 15 to 30 words, no colons, semicolons or dashes,</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/checklist.md" target="_blank" rel="noopener">no promotional words, every claim with its evidence in the same sentence.</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="footer">Run it: <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/installation.md#a-plugin-from-the-marketplace" target="_blank" rel="noopener">/plugin marketplace add Sdamirsa/SciFi, then /plugin install scifi@scifi</a> (Claude Code); <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/install_local.sh" target="_blank" rel="noopener">scripts/install_local.sh &lt;project&gt;</a> to copy into .claude/; <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scifi-lite.skill" target="_blank" rel="noopener">dist/scifi-lite.skill</a> and <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scientific-writing.skill" target="_blank" rel="noopener">dist/scientific-writing.skill</a> for claude.ai.</p>
+</section>
+
+<section class="view" id="view-ai" data-view="ai">
+  <p class="subtitle">Two skills uploaded to claude.ai. No subagents, no hooks, no model routing. The roles below run in sequence in one context, each writing its output before the next role&#x27;s rules are read. The workspace files are the plugin&#x27;s, so a paper started here continues in Claude Code. <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">What works and what does not</a></p>
+  <div class="cols">
+    <div class="col box">
+      <h2 class="col-title"><a href="https://github.com/Sdamirsa/SciFi/tree/main/dist" target="_blank" rel="noopener">dist/</a>  (what you upload, built by <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/package_skills.py" target="_blank" rel="noopener">package_skills.py</a>)</h2>
+      <div class="rows">
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scifi-lite.skill" target="_blank" rel="noopener">scifi-lite.skill</a></span><span class="desc">the loop in one session; unpacks to the files below</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">SKILL.md</a></span><span class="desc">spine, skeleton, the loop, evaluation only, limits</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/references" target="_blank" rel="noopener">references/standards/</a></span><span class="desc">copy of the scientific-writing references</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">global-rules.md</a></span><span class="desc">section 2 of the standards skill</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/references/sections" target="_blank" rel="noopener">sections/&lt;section&gt;.md</a></span><span class="desc">title to back matter, original and review</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/checklist.md" target="_blank" rel="noopener">checklist.md</a></span><span class="desc">sections A to H, cited by every finding</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/journal-profiles.md" target="_blank" rel="noopener">journal-profiles.md</a></span><span class="desc">npj, jamia, nature, lancet, ehj, default</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/figures.md" target="_blank" rel="noopener">figures.md  tables.md  captions.md</a></span><span class="desc">display items</span></div>
+<div class="row lvl2"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/examples" target="_blank" rel="noopener">examples/</a></span><span class="desc">skeletons and abstract variants</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md" target="_blank" rel="noopener">references/protocol.md</a></span><span class="desc">workspace layout, finding format, synthesis</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/scripts/check_manuscript.py" target="_blank" rel="noopener">scripts/check_manuscript.py</a></span><span class="desc">style checker, needs code execution</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/validate_json.py" target="_blank" rel="noopener">scripts/validate_json.py</a></span><span class="desc">schema check, needs code execution</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/scripts/schemas" target="_blank" rel="noopener">scripts/schemas/</a></span><span class="desc">the nine JSON schemas</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scientific-writing.skill" target="_blank" rel="noopener">scientific-writing.skill</a></span><span class="desc">the standards alone, without the loop</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">SKILL.md</a></span><span class="desc">draft, revise, plan or audit one section</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/references" target="_blank" rel="noopener">references/</a></span><span class="desc">same references as above</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills/scientific-writing/examples" target="_blank" rel="noopener">examples/</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/scripts/check_manuscript.py" target="_blank" rel="noopener">scripts/check_manuscript.py</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">Not shipped here</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/agents" target="_blank" rel="noopener">agents/</a></span><span class="desc">no subagents on claude.ai; the roles run in sequence</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/hooks" target="_blank" rel="noopener">hooks/</a></span><span class="desc">no hooks; validation only with code execution</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/skills" target="_blank" rel="noopener">scifi-export, scifi-stats, scifi-literature</a></span><span class="desc">plugin only</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/project-memory/SKILL.md" target="_blank" rel="noopener">project-memory</a></span><span class="desc">no ritual; save STATE.json yourself</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/installation.md#d-claudeai" target="_blank" rel="noopener">Install</a></span><span class="desc">Settings, Skills, upload both .skill files; turn code execution on</span></div>
+      </div>
+      <p class="col-foot">&#8594; <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/installation.md#d-claudeai" target="_blank" rel="noopener">two .skill uploads</a></p>
+    </div>
+
+    <div class="col lanes">
+      <div class="lane human">
+        <div class="lane-head"><h2>HUMAN</h2><span class="to-ws human-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">uploads</a> &#8594;</span></div>
+        <h3>Uploads the paper, then types a phrase</h3>
+        <div class="cmds">
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">&quot;check paragraph 2 of my discussion with SciFi, journal lancet&quot;</a></span><span class="desc">one unit through the loop</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">&quot;evaluate this manuscript for JAMIA&quot;</a></span><span class="desc">comments with severity, location, rule, fix; a verdict</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">&quot;extract the spine and skeleton of this paper&quot;</a></span><span class="desc">claim, threads, reverse outline</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">&quot;tighten this abstract for npj Digital Medicine&quot;</a></span><span class="desc">standards skill alone, one section</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">&quot;check this methods section&quot;</a></span><span class="desc">standards audit, checker if code execution is on</span></div>
+<div class="cmd"><span class="mono"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">upload STATE.json to resume</a></span><span class="desc">resume is manual here</span></div>
+        </div>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#6-control-modes" target="_blank" rel="noopener">Decides at gates: picks one option, agrees to the synthesis, answers NEED requests.</a></p>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">Uploads the sections, results.md and the full texts of cited papers; without full texts, evidence findings are NEEDs.</a></p>
+<p class="note human-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#6-control-modes" target="_blank" rel="noopener">Modes as in the plugin: co-thinker (default), human-on-the-loop, human-in-the-loop, fully-automated.</a></p>
+      </div>
+      <div class="between">
+        <span class="master-ink dashed">&#8593; <a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#6-control-modes" target="_blank" rel="noopener">findings and picks, wait for agreement</a></span>
+        <span class="human-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md#using-scifi-lite" target="_blank" rel="noopener">phrase, journal, mode</a> &#8595;</span>
+      </div>
+      <div class="lane master">
+        <div class="lane-head"><h2>ONE CLAUDE  (the session model plays master and every role)</h2><span class="to-ws master-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">files or JSON blocks</a> &#8594;</span></div>
+        <div class="steps">
+<div class="step"><span class="num">0</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">resume</a></span><span class="desc dark">read the uploaded STATE.json; no session-start hook</span></div>
+<div class="step"><span class="num">1</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">spine</a></span><span class="desc dark">results R1.., gap, 2 or 3 claims with one pick, threads  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/spine.schema.json" target="_blank" rel="noopener">spine.json</a></span></div>
+<div class="step"><span class="num">2</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">skeleton</a></span><span class="desc dark">units with takeaway and thread, reverse-outline test  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/skeleton.schema.json" target="_blank" rel="noopener">skeleton.json</a></span></div>
+<div class="step"><span class="num">3</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">figures</a></span><span class="desc dark">brainstorm only; the generation script needs code execution</span></div>
+<div class="step"><span class="num">4</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">the loop</a></span><span class="desc dark">map, five checks, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/synthesis.schema.json" target="_blank" rel="noopener">synthesis</a>, draft, gate, as separate written passes</span></div>
+<div class="step"><span class="num">5</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">evaluation only</a></span><span class="desc dark">spine, skeleton, steps 1 to 3 per unit, no draft, <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/comments.schema.json" target="_blank" rel="noopener">comments/&lt;id&gt;.json</a></span></div>
+<div class="step"><span class="num">6</span><span class="step-name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/state.schema.json" target="_blank" rel="noopener">state</a></span><span class="desc dark">update STATE.json and append to log/decisions.jsonl; no ritual</span></div>
+        </div>
+<p class="note master-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">Writes each role&#x27;s output before reading the next role&#x27;s rules; that is the only isolation here.</a></p>
+<p class="note master-note"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/validate_json.py" target="_blank" rel="noopener">Every JSON follows the plugin schemas; validated with validate_json.py when code execution is on.</a></p>
+      </div>
+      <div class="between">
+        <span class="master-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">the role&#x27;s rules and inputs</a> &#8595;</span>
+        <span class="agent-ink">&#8593; <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/envelope.schema.json" target="_blank" rel="noopener">envelope JSON, written before the next role</a></span>
+      </div>
+      <div class="lane agents">
+        <div class="lane-head"><h2>ROLES  (played in sequence, one envelope each, same schemas)</h2><span class="to-ws agent-ink"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#4-the-envelope-agent-to-master" target="_blank" rel="noopener">one envelope per role</a> &#8594;</span></div>
+        <h3>The loop for one unit</h3>
+        <div class="agent-rows">
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">logic-mapper</a></span><span class="desc dark">claims, evidence, steps of the text  <a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/logic.schema.json" target="_blank" rel="noopener">units/&lt;id&gt;.logic.json</a></span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">flow</a></span><span class="desc dark">internal: one point, context first, takeaway last, old to new</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">local</a></span><span class="desc dark">neighbours: redundancy, pre-emption, bridge, single home</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">global</a></span><span class="desc dark">spine and results: serves the claim, same gap, no new data</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">evidence</a></span><span class="desc dark">each claim vs the sources the user supplied, the results, or a step</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">style</a></span><span class="desc dark"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/checklist.md" target="_blank" rel="noopener">checklist</a> A, C, D and the section&#x27;s letter, plus the section file</span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">drafter</a></span><span class="desc dark">rewrites from logic.json and the accepted findings  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/units/d03.draft.md" target="_blank" rel="noopener">units/&lt;id&gt;.draft.md</a></span></div>
+<div class="agent"><span class="mono bold"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">standards-gate</a></span><span class="desc dark">one pass: PASS, or RETURN with three blockers</span></div>
+        </div>
+        <p class="pills"><a class="pill" style="background:#5a8f6a" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">one model</a><a class="pill" style="background:#7a9d85" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">in sequence</a><a class="pill" style="background:#2a8a56" href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">same envelope</a><span class="agent-ink pill-note">no model routing; the checks share one context, so treat findings as a strong first pass</span></p>
+      </div>
+    </div>
+
+    <div class="col box">
+      <h2 class="col-title"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace" target="_blank" rel="noopener">&lt;your-paper&gt;/</a>  (a project or an uploaded folder; same layout)</h2>
+      <div class="rows ws">
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Manuscript" target="_blank" rel="noopener">Manuscript/</a></span><span class="desc">YOU upload, pandoc [@citekey]</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/title.md" target="_blank" rel="noopener">title.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/abstract.md" target="_blank" rel="noopener">abstract.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/introduction.md" target="_blank" rel="noopener">introduction.md</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/methods.md" target="_blank" rel="noopener">methods.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/results.md" target="_blank" rel="noopener">results.md</a>  <a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Manuscript/discussion.md" target="_blank" rel="noopener">discussion.md</a></span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Literature" target="_blank" rel="noopener">Literature/</a></span><span class="desc">YOU upload</span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Literature/library.json" target="_blank" rel="noopener">library.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/zotero-guide.md" target="_blank" rel="noopener">Better CSL JSON (citation keys)</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Literature/fulltext" target="_blank" rel="noopener">fulltext/&lt;citekey&gt;.pdf|.md</a></span><span class="desc">the cited papers; without them evidence is a NEED</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space" target="_blank" rel="noopener">Thinking-space/</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">written as files, or shown as JSON blocks</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/STATE.json" target="_blank" rel="noopener">STATE.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/state.schema.json" target="_blank" rel="noopener">stage, mode, journal, next action; upload it to resume</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/spine.json" target="_blank" rel="noopener">spine.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/spine.schema.json" target="_blank" rel="noopener">claim, gap, results, implications, threads</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/skeleton.json" target="_blank" rel="noopener">skeleton.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/skeleton.schema.json" target="_blank" rel="noopener">units per section, takeaway, thread</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/units" target="_blank" rel="noopener">units/&lt;id&gt;.logic.json, .draft.md</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/logic.schema.json" target="_blank" rel="noopener">one unit&#x27;s logic and drafts</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/tree/main/example-workspace/Thinking-space/handshakes" target="_blank" rel="noopener">handshakes/&lt;id&gt;.&lt;role&gt;.r&lt;n&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/envelope.schema.json" target="_blank" rel="noopener">one envelope per role</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/handshakes/d03.synthesis.r1.json" target="_blank" rel="noopener">handshakes/&lt;id&gt;.synthesis.r&lt;n&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/synthesis.schema.json" target="_blank" rel="noopener">the decisions on the findings</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/comments/d02.json" target="_blank" rel="noopener">comments/&lt;id&gt;.json</a></span><span class="desc"><a href="https://github.com/Sdamirsa/SciFi/blob/main/scripts/schemas/comments.schema.json" target="_blank" rel="noopener">evaluation comments and the verdict</a></span></div>
+<div class="row lvl1"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/example-workspace/Thinking-space/log/decisions.jsonl" target="_blank" rel="noopener">log/decisions.jsonl</a></span><span class="desc">append-only: who decided what, why</span></div>
+<div class="row lvl0"><span class="name"><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">Carry on in Claude Code</a></span><span class="desc">copy the folder into a workspace; the plugin resumes from STATE.json</span></div>
+      </div>
+      <div class="rules">
+        <h3>Rules that hold here too</h3>
+        <ul>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">Your text is never changed in place; drafts are proposals next to it.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">Each role&#x27;s output is written before the next role&#x27;s rules are read.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#4-the-envelope-agent-to-master" target="_blank" rel="noopener">A finding without a location and a rule is not reported.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#11-honesty" target="_blank" rel="noopener">No number that is not in the results; no source that was not supplied.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/protocol.md#11-honesty" target="_blank" rel="noopener">Unverifiable is never reported as supported; it is a NEED.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scifi-lite/SKILL.md" target="_blank" rel="noopener">No artifact is skipped because there is nowhere to write it.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/claude-ai.md" target="_blank" rel="noopener">The checks share one context; use the plugin when a paper is near submission.</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/SKILL.md" target="_blank" rel="noopener">Standards: sentences 15 to 30 words, no colons, semicolons or dashes,</a></li>
+<li><a href="https://github.com/Sdamirsa/SciFi/blob/main/skills/scientific-writing/references/checklist.md" target="_blank" rel="noopener">no promotional words, every claim with its evidence in the same sentence.</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="footer">Run it: upload <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scifi-lite.skill" target="_blank" rel="noopener">dist/scifi-lite.skill</a> and <a href="https://github.com/Sdamirsa/SciFi/blob/main/dist/scientific-writing.skill" target="_blank" rel="noopener">dist/scientific-writing.skill</a> in claude.ai (<a href="https://github.com/Sdamirsa/SciFi/blob/main/docs/installation.md#d-claudeai" target="_blank" rel="noopener">installation D</a>), turn code execution on, upload your sections and papers, then say what to check.</p>
+</section>
+</div>
+<script>
+(function () {
+  var titles = {"local": "SciFi: scientific manuscripts from findings to inference", "ai": "SciFi on claude.ai: the same files, one Claude playing every role"};
+  var keys = Object.keys(titles);
+  var hashFor = { local: 'local', ai: 'claude-ai' };
+  function show(key) {
+    keys.forEach(function (k) {
+      var sec = document.getElementById('view-' + k);
+      var tab = document.getElementById('tab-' + k);
+      sec.hidden = (k !== key);
+      tab.setAttribute('aria-selected', k === key ? 'true' : 'false');
+    });
+    document.getElementById('page-title').textContent = titles[key];
+    try { localStorage.setItem('scifi-anatomy-view', key); } catch (e) {}
+  }
+  var initial = keys[0];
+  var h = (location.hash || '').replace('#', '');
+  keys.forEach(function (k) { if (hashFor[k] === h) initial = k; });
+  if (!h) { try { var s = localStorage.getItem('scifi-anatomy-view'); if (s && titles[s]) initial = s; } catch (e) {} }
+  show(initial);
+  document.querySelectorAll('.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.view); });
+  });
+  window.addEventListener('hashchange', function () {
+    var h = (location.hash || '').replace('#', '');
+    keys.forEach(function (k) { if (hashFor[k] === h) show(k); });
+  });
+})();
+</script>
