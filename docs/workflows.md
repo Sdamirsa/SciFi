@@ -105,7 +105,7 @@ writes the next action into `STATE.json`. A failed check stops it and says why. 
 
 ## Export to Word and Google Docs
 
-`/scifi-export --library users/<id>` writes `export/<name>.docx` with Scannable Cite markers for every `[@citekey]`, plus a report of unmapped keys. Then follow the seven steps in [zotero-guide.md](zotero-guide.md#export-to-word-and-google-docs-with-live-citations). Needs `Literature/library.bbt.json` (Better BibTeX JSON export).
+`/scifi-export --library users/<id>` writes `export/<name>.docx` in which every `[@citekey]` is already a live Zotero citation field, plus a report of unmapped keys. Open it in Word, choose the style in Document Preferences, press Refresh and insert the bibliography; the steps are in [zotero-guide.md](zotero-guide.md#export-to-word-and-google-docs-with-live-citations). `--convert` turns an existing .docx with Scannable Cite markers into fields. Needs `Literature/library.bbt.json` (Better BibTeX JSON export).
 
 ## Choose a statistical method
 
