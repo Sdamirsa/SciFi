@@ -170,7 +170,7 @@ LOCAL = {
         ("  ", S(("comments/<id>.json", "example-workspace/Thinking-space/comments/d02.json")), S(("review comments with severity and fix", "scripts/schemas/comments.schema.json"))),
         ("  ", S(("log/decisions.jsonl", "example-workspace/Thinking-space/log/decisions.jsonl")), S("append-only: who decided what, why")),
         ("  ", S(("scratch/", "example-workspace/Thinking-space/scratch")), S("option exploration, inspectable")),
-        ("", S(("export/", "skills/scifi-export/SKILL.md")), S("docx with Zotero markers, report")),
+        ("", S(("export/", "skills/scifi-export/SKILL.md")), S("docx with live Zotero citations, report")),
         ("", S((".claude/", "example-workspace/.claude")), S(("memory spine (minimal dot-claude-iff)", "skills/project-memory/SKILL.md"))),
         ("  ", S(("STATUS.md", "example-workspace/.claude/STATUS.md")), S("read first; rewritten by the ritual")),
         ("  ", S(("Project-log.jsonl", "example-workspace/.claude/Project-log.jsonl")), S("one line per real thing")),

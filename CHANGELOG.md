@@ -27,6 +27,13 @@ Initial release.
 - `scripts/build_workflows.py` builds the scripts from `scripts/workflow_templates/` with the envelope schema inlined; `scripts/tests/_workflow_harness.js` runs them end to end with mock agents in the tests.
 - `install_local.sh` and the `.claude/` zip carry `workflows/` with the agent prefix removed.
 
+## 0.2.1
+
+- `scifi-export` writes live Zotero citation fields directly (`ADDIN ZOTERO_ITEM CSL_CITATION` with the item URI and CSL data, as Zotero's Word plugin and Better BibTeX's pandoc filter write them). The author picks a style, presses Refresh and inserts the bibliography; no ODF/DOCX Scan add-on is needed.
+- `export_docx.py --convert` turns an existing .docx with Scannable Cite markers into fields. It edits document text only, so pictures, tables, comments and tracked changes stay intact, and it takes item data from Zotero desktop's local API.
+- `--markers` keeps the old Scannable Cite output. The Zotero guide now warns that the ODF/DOCX Scan corrupts any .docx with pictures: it matches raw XML and takes the `{GUID}` in picture markup for a marker.
+- Tests for field export, `--markers` and conversion next to a picture.
+
 ## Planned
 
 - Detect hand edits to accepted drafts by storing a hash of each draft in STATE.json and comparing on resume (sets the unit to human-edited).
